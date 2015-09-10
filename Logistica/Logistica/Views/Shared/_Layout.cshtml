@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/angular.min.js")
 
 </head>
 <body>
@@ -17,13 +18,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Logística", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>GitHubVisualStudio
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Brigadas&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Fichas</a></li>
+                            <li><a href="#">Itinerarios</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Calendario de Brigada</a></li>
+                            <li><a href="#">Calendario de Eventos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Métricas&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Evaluaciones</a></li>
+                            <li><a href="#">Reportes</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Configuraciones&nbsp;<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Campamentos</a></li>
+                            <li><a href="#">Comunidades</a></li>
+                            <li><a href="#">Equipos de Cocina</a></li>
+                            <li><a href="#">Equipos de Seguridad</a></li>
+                            <li><a href="#">Inventario de Cocina</a></li>
+                            <li><a href="#">Inventario de Medicinas</a></li>
+                            <li><a href="#">Personal</a></li>
+                            <li><a href="#">Universidades</a></li>
+                            <li><a href="#">Vehículos</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Usuarios</a></li>
+                            <li><a href="#">Roles</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -31,14 +63,15 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document.body).tooltip({ selector: "[data-toggle='tooltip']" });
+    </script>
+
 </body>
 </html>
