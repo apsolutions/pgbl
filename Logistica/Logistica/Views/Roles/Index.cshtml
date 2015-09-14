@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+
+@{
+    ViewBag.Title = "Roles";
+}
+
+<div data-ng-app="rolesIndex" data-ng-controller="rolesIndexController">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class=""><strong>@ViewBag.Title</strong></h2>
+        </div>
+        <div class="col-sm-2">
+            <h2 class="text-primary text-center">
+                <span class="glyphicon glyphicon-pawn"></span>
+            </h2>
+        </div>
+    </div>
+
+    <hr/>
+    
+    <div class="row">
+        <div class="col-sm-5">
+            <h4 class="text-primary"><strong>Rol</strong></h4>
+            <div class="list-group" data-ng-if="Roles.length > 0">
+                <a href="" class="list-group-item" data-ng-class="{active : rol.Seleccionado}" data-ng-repeat="rol in Roles" data-ng-click="seleccionarRol(rol)">
+                    {{rol.Name}}
+                </a>
+            </div>
+            <p data-ng-if="Roles.length == 0" class="text-info"> <span class="glyphicon glyphicon-info-sign"></span> No se encontraron roles en la base de datos</p>            
+        </div>
+
+        <div class="col-sm-5" data-ng-if="Roles.length > 0">
+            <h4 class="text-primary"><strong>Acciones</strong></h4>
+            <div class="btn-group-vertical">
+                <a href="~/Roles/Edit/{{RolSeleccionado.Id}}" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    Editar
+                </a>
+                <a href="" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}" data-ng-click="eliminarRol()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Eliminar
+                </a>
+            </div>
+        </div>
+
+        <div data-ng-class="{'col-sm-2' : Roles.length > 0 , 'col-sm-7' : Roles.length == 0}">
+            <a href='@Url.Action("Create")' class="btn btn-default pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                Crear
+            </a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = angular.module('rolesIndex', []).controller('rolesIndexController', function ($scope, $http) {
+            $scope.Roles = @Html.Raw(Json.Encode(Model));
+            $scope.RolSeleccionado = null;
+            $scope.HaSeleccionado = false;
+
+            $scope.seleccionarRol = function (rol){
+                if (!$scope.RolSeleccionado){
+                    $scope.Roles[$scope.Roles.indexOf(rol)].Seleccionado = true;
+                }else{
+                    $scope.Roles[$scope.Roles.indexOf($scope.RolSeleccionado)].Seleccionado = false;
+                    $scope.Roles[$scope.Roles.indexOf(rol)].Seleccionado = true;
+                }
+                $scope.HaSeleccionado = true;
+                $scope.RolSeleccionado = rol;
+            }
+
+            $scope.eliminarRol = function(){
+                $http.post('@Url.Action("Delete")', { id: $scope.RolSeleccionado.Id})
+                    .success(function (data) {
+                        $scope.Roles.splice($scope.Roles.indexOf($scope.RolSeleccionado),1);
+                        $scope.HaSeleccionado = false;
+                        $scope.RolSeleccionado = null;
+                    })
+                    .error(function () {
+                        console.alert("Error");
+                    });
+            }
+        });
+    </script>
+    }
