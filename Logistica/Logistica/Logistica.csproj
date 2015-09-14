@@ -174,75 +174,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="db_logistica\alertas.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\community.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\compound.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\dbLogistica.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbLogistica.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\dbLogistica.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\dbLogistica.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dbLogistica.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\evaluation.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\evaluationType.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\ficha.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\fichaFlights.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\itinerary.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\kitchenFood.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\kitchenTools.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\programs.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\securityEquipments.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\securityMedicines.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\spokenLanguage.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\staff.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\university.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\vehicles.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
-    <Compile Include="db_logistica\volunteers.cs">
-      <DependentUpon>dbLogistica.tt</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -336,7 +267,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Comunidad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
