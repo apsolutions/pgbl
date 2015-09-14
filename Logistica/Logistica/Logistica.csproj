@@ -52,6 +52,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -168,10 +170,79 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ComunidadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
-    <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="db_logistica\alertas.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\community.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\compound.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\dbLogistica.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbLogistica.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\dbLogistica.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\dbLogistica.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dbLogistica.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\evaluation.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\evaluationType.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\ficha.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\fichaFlights.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\itinerary.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\kitchenFood.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\kitchenTools.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\programs.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\securityEquipments.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\securityMedicines.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\spokenLanguage.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\staff.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\university.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\vehicles.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="db_logistica\volunteers.cs">
+      <DependentUpon>dbLogistica.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -186,6 +257,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\loginBG.png" />
+    <Content Include="db_logistica\dbLogistica.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbLogistica.edmx</DependentUpon>
+      <LastGenOutput>dbLogistica.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="db_logistica\dbLogistica.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>dbLogistica.edmx</DependentUpon>
+      <LastGenOutput>dbLogistica.cs</LastGenOutput>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -195,6 +276,13 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <EntityDeploy Include="db_logistica\dbLogistica.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>dbLogistica.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="db_logistica\dbLogistica.edmx.diagram">
+      <DependentUpon>dbLogistica.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -248,7 +336,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Usuarios\" />
+    <Folder Include="Views\Comunidad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -257,6 +345,9 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
