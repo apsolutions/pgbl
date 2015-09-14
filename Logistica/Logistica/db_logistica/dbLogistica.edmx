@@ -1,0 +1,1358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="logisticaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="alertas">
+          <Key>
+            <PropertyRef Name="alertasID" />
+          </Key>
+          <Property Name="alertasID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="community">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="comm_members" Type="int" Nullable="false" />
+          <Property Name="disable" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="communityxprograms">
+          <Key>
+            <PropertyRef Name="community" />
+            <PropertyRef Name="program" />
+          </Key>
+          <Property Name="community" Type="int" Nullable="false" />
+          <Property Name="program" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="compound">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="location" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="town" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
+          <Property Name="bedrooms" Type="int" Nullable="false" />
+          <Property Name="electricity" Type="smallint" Nullable="false" />
+          <Property Name="wifi" Type="smallint" Nullable="false" />
+          <Property Name="cellphone_signal" Type="smallint" Nullable="false" />
+          <Property Name="ventilation" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="toilet_type" Type="nvarchar" MaxLength="100" />
+          <Property Name="toilet_quantity" Type="int" />
+          <Property Name="drinkable_water" Type="smallint" Nullable="false" />
+          <Property Name="disable" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="evaluation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="tipo" Type="bigint" Nullable="false" />
+          <Property Name="respuesta" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="evaluationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="formulario" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ficha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="startingDate" Type="date" />
+          <Property Name="endDate" Type="date" />
+          <Property Name="officeArrivalDate" Type="nvarchar" MaxLength="10" />
+          <Property Name="officeLeaveDate" Type="nvarchar" MaxLength="10" />
+          <Property Name="totalStudents" Type="smallint" />
+          <Property Name="cityTour" Type="nvarchar" MaxLength="20" />
+          <Property Name="compound" Type="int" />
+          <Property Name="community" Type="int" />
+          <Property Name="program" Type="int" Nullable="false" />
+          <Property Name="subProgram" Type="int" />
+          <Property Name="priDtop" Type="date" />
+          <Property Name="priDted" Type="date" />
+          <Property Name="secDtop" Type="date" />
+          <Property Name="secDted" Type="date" />
+        </EntityType>
+        <EntityType Name="fichaFlights">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ficha" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="type" Type="smallint" Nullable="false" />
+          <Property Name="arrivalTime" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="totalStudents" Type="smallint" Nullable="false" />
+          <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fichaVehicles">
+          <Key>
+            <PropertyRef Name="ficha" />
+            <PropertyRef Name="vehicle" />
+          </Key>
+          <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="vehicle" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="itinerary">
+          <Key>
+            <PropertyRef Name="fichaId" />
+          </Key>
+          <Property Name="fichaId" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="actividades" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kitchenFood">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="unit" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="cost" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="vendor" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="buyDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kitchenTools">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="quantity" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="programs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="program" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="securityEquipments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="quantity" Type="smallint" Nullable="false" />
+          <Property Name="cost" Type="smallint" Nullable="false" />
+          <Property Name="coments" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="securityMedicines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="quantity" Type="smallint" Nullable="false" />
+          <Property Name="expirationDate" Type="date" Nullable="false" />
+          <Property Name="especs" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="cost" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spokenLanguage">
+          <Key>
+            <PropertyRef Name="staff" />
+            <PropertyRef Name="slanguage" />
+          </Key>
+          <Property Name="staff" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="slanguage" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="20" />
+          <Property Name="name" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="sex" Type="smallint" Nullable="false" />
+          <Property Name="bornDate" Type="date" Nullable="false" />
+          <Property Name="age" Type="smallint" />
+          <Property Name="citizenship" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="bloodType" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="maritalStatus" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="cellphoneNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="university" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="allergies" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="medicalCondition" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="emergencyContact" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="career" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="contractDate" Type="date" />
+          <Property Name="interviewDate" Type="date" />
+          <Property Name="disable" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staffInFichas">
+          <Key>
+            <PropertyRef Name="ficha" />
+            <PropertyRef Name="staffID" />
+          </Key>
+          <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="staffID" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staffxprograms">
+          <Key>
+            <PropertyRef Name="staff" />
+            <PropertyRef Name="program" />
+          </Key>
+          <Property Name="staff" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="program" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="universitiesInFichas">
+          <Key>
+            <PropertyRef Name="ficha" />
+            <PropertyRef Name="university" />
+          </Key>
+          <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="university" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="university">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="40" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="disable" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vehicles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="contractType" Type="smallint" Nullable="false" />
+          <Property Name="lessor" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="capacity" Type="smallint" Nullable="false" />
+          <Property Name="vyear" Type="smallint" Nullable="false" />
+          <Property Name="insuranceCompany" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="insuranceNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="insuranceType" Type="smallint" Nullable="false" />
+          <Property Name="contactPhone" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="disable" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="volunteers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ficha" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="type" Type="smallint" Nullable="false" />
+          <Property Name="earlyArrival" Type="smallint" Nullable="false" />
+          <Property Name="ownLeave" Type="smallint" Nullable="false" />
+          <Property Name="allergies" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="medicalCondition" Type="nvarchar" MaxLength="300" />
+          <Property Name="emergencyContact" Type="nvarchar" MaxLength="100" />
+          <Property Name="diet" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="comments" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="flights" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="communityxprograms$communityToProgram">
+          <End Role="community" Type="Self.community" Multiplicity="1" />
+          <End Role="communityxprograms" Type="Self.communityxprograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="community">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="communityxprograms">
+              <PropertyRef Name="community" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="communityxprograms$ProgramToCommunity">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="communityxprograms" Type="Self.communityxprograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="communityxprograms">
+              <PropertyRef Name="program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ficha$communityOfFicha">
+          <End Role="community" Type="Self.community" Multiplicity="0..1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="community">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="community" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ficha$programOfFicha">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ficha$subProgramOfFicha">
+          <End Role="programs" Type="Self.programs" Multiplicity="0..1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="subProgram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fichaFlights$fichaToFlights">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="fichaFlights" Type="Self.fichaFlights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fichaFlights">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fichaVehicles$Vehicle">
+          <End Role="vehicles" Type="Self.vehicles" Multiplicity="1" />
+          <End Role="fichaVehicles" Type="Self.fichaVehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vehicles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fichaVehicles">
+              <PropertyRef Name="vehicle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evaluationxevaluationType">
+          <End Role="evaluationType" Type="Self.evaluationType" Multiplicity="1" />
+          <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evaluationType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="evaluation">
+              <PropertyRef Name="tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ficha_compound">
+          <End Role="compound" Type="Self.compound" Multiplicity="0..1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compound">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="compound" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_fichaVehicles_ficha">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="fichaVehicles" Type="Self.fichaVehicles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fichaVehicles">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_itinerary_ficha">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="itinerary" Type="Self.itinerary" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="itinerary">
+              <PropertyRef Name="fichaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_spokenLanguage_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="spokenLanguage" Type="Self.spokenLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="spokenLanguage">
+              <PropertyRef Name="staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staffInFichas_ficha">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="staffInFichas" Type="Self.staffInFichas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staffInFichas">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staffInFichas_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="staffInFichas" Type="Self.staffInFichas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staffInFichas">
+              <PropertyRef Name="staffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staffxprograms_programs">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="staffxprograms" Type="Self.staffxprograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staffxprograms">
+              <PropertyRef Name="program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_staffxprograms_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="staffxprograms" Type="Self.staffxprograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="staffxprograms">
+              <PropertyRef Name="staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="universitiesInFichas$fichaToUniversity">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="universitiesInFichas" Type="Self.universitiesInFichas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="universitiesInFichas">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="universitiesInFichas$universityToFicha">
+          <End Role="university" Type="Self.university" Multiplicity="1" />
+          <End Role="universitiesInFichas" Type="Self.universitiesInFichas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="university">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="universitiesInFichas">
+              <PropertyRef Name="university" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="volunteers$fichaToVolunteers">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="volunteers" Type="Self.volunteers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="volunteers">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="logisticaModelStoreContainer">
+          <EntitySet Name="alertas" EntityType="Self.alertas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="community" EntityType="Self.community" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="communityxprograms" EntityType="Self.communityxprograms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="compound" EntityType="Self.compound" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="evaluation" EntityType="Self.evaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="evaluationType" EntityType="Self.evaluationType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ficha" EntityType="Self.ficha" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fichaFlights" EntityType="Self.fichaFlights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fichaVehicles" EntityType="Self.fichaVehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="itinerary" EntityType="Self.itinerary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitchenFood" EntityType="Self.kitchenFood" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="kitchenTools" EntityType="Self.kitchenTools" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="programs" EntityType="Self.programs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="securityEquipments" EntityType="Self.securityEquipments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="securityMedicines" EntityType="Self.securityMedicines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="spokenLanguage" EntityType="Self.spokenLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staffInFichas" EntityType="Self.staffInFichas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staffxprograms" EntityType="Self.staffxprograms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="universitiesInFichas" EntityType="Self.universitiesInFichas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="university" EntityType="Self.university" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vehicles" EntityType="Self.vehicles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="volunteers" EntityType="Self.volunteers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="communityxprograms$communityToProgram" Association="Self.communityxprograms$communityToProgram">
+            <End Role="community" EntitySet="community" />
+            <End Role="communityxprograms" EntitySet="communityxprograms" />
+          </AssociationSet>
+          <AssociationSet Name="communityxprograms$ProgramToCommunity" Association="Self.communityxprograms$ProgramToCommunity">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="communityxprograms" EntitySet="communityxprograms" />
+          </AssociationSet>
+          <AssociationSet Name="ficha$communityOfFicha" Association="Self.ficha$communityOfFicha">
+            <End Role="community" EntitySet="community" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="ficha$programOfFicha" Association="Self.ficha$programOfFicha">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="ficha$subProgramOfFicha" Association="Self.ficha$subProgramOfFicha">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="fichaFlights$fichaToFlights" Association="Self.fichaFlights$fichaToFlights">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="fichaFlights" EntitySet="fichaFlights" />
+          </AssociationSet>
+          <AssociationSet Name="fichaVehicles$Vehicle" Association="Self.fichaVehicles$Vehicle">
+            <End Role="vehicles" EntitySet="vehicles" />
+            <End Role="fichaVehicles" EntitySet="fichaVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evaluationxevaluationType" Association="Self.FK_evaluationxevaluationType">
+            <End Role="evaluationType" EntitySet="evaluationType" />
+            <End Role="evaluation" EntitySet="evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ficha_compound" Association="Self.FK_ficha_compound">
+            <End Role="compound" EntitySet="compound" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_fichaVehicles_ficha" Association="Self.FK_fichaVehicles_ficha">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="fichaVehicles" EntitySet="fichaVehicles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_itinerary_ficha" Association="Self.FK_itinerary_ficha">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="itinerary" EntitySet="itinerary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_spokenLanguage_staff" Association="Self.FK_spokenLanguage_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="spokenLanguage" EntitySet="spokenLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staffInFichas_ficha" Association="Self.FK_staffInFichas_ficha">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="staffInFichas" EntitySet="staffInFichas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staffInFichas_staff" Association="Self.FK_staffInFichas_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="staffInFichas" EntitySet="staffInFichas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staffxprograms_programs" Association="Self.FK_staffxprograms_programs">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="staffxprograms" EntitySet="staffxprograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_staffxprograms_staff" Association="Self.FK_staffxprograms_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="staffxprograms" EntitySet="staffxprograms" />
+          </AssociationSet>
+          <AssociationSet Name="universitiesInFichas$fichaToUniversity" Association="Self.universitiesInFichas$fichaToUniversity">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="universitiesInFichas" EntitySet="universitiesInFichas" />
+          </AssociationSet>
+          <AssociationSet Name="universitiesInFichas$universityToFicha" Association="Self.universitiesInFichas$universityToFicha">
+            <End Role="university" EntitySet="university" />
+            <End Role="universitiesInFichas" EntitySet="universitiesInFichas" />
+          </AssociationSet>
+          <AssociationSet Name="volunteers$fichaToVolunteers" Association="Self.volunteers$fichaToVolunteers">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="volunteers" EntitySet="volunteers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="logisticaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="alertas">
+          <Key>
+            <PropertyRef Name="alertasID" />
+          </Key>
+          <Property Name="alertasID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="community">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comm_members" Type="Int32" Nullable="false" />
+          <Property Name="disable" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ficha" Relationship="Self.ficha_communityOfFicha" FromRole="community" ToRole="ficha" />
+          <NavigationProperty Name="programs" Relationship="Self.communityxprograms" FromRole="community" ToRole="programs" />
+        </EntityType>
+        <EntityType Name="compound">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="town" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
+          <Property Name="bedrooms" Type="Int32" Nullable="false" />
+          <Property Name="electricity" Type="Int16" Nullable="false" />
+          <Property Name="wifi" Type="Int16" Nullable="false" />
+          <Property Name="cellphone_signal" Type="Int16" Nullable="false" />
+          <Property Name="ventilation" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="toilet_type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="toilet_quantity" Type="Int32" />
+          <Property Name="drinkable_water" Type="Int16" Nullable="false" />
+          <Property Name="disable" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ficha" Relationship="Self.FK_ficha_compound" FromRole="compound" ToRole="ficha" />
+        </EntityType>
+        <EntityType Name="evaluation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" />
+          <Property Name="tipo" Type="Int64" Nullable="false" />
+          <Property Name="respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="evaluationType" Relationship="Self.FK_evaluationxevaluationType" FromRole="evaluation" ToRole="evaluationType" />
+        </EntityType>
+        <EntityType Name="evaluationType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="formulario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="evaluation" Relationship="Self.FK_evaluationxevaluationType" FromRole="evaluationType" ToRole="evaluation" />
+        </EntityType>
+        <EntityType Name="ficha">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="startingDate" Type="DateTime" Precision="0" />
+          <Property Name="endDate" Type="DateTime" Precision="0" />
+          <Property Name="officeArrivalDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="officeLeaveDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="totalStudents" Type="Int16" />
+          <Property Name="cityTour" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="compound" Type="Int32" />
+          <Property Name="community" Type="Int32" />
+          <Property Name="program" Type="Int32" Nullable="false" />
+          <Property Name="subProgram" Type="Int32" />
+          <Property Name="priDtop" Type="DateTime" Precision="0" />
+          <Property Name="priDted" Type="DateTime" Precision="0" />
+          <Property Name="secDtop" Type="DateTime" Precision="0" />
+          <Property Name="secDted" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="community1" Relationship="Self.ficha_communityOfFicha" FromRole="ficha" ToRole="community" />
+          <NavigationProperty Name="compound1" Relationship="Self.FK_ficha_compound" FromRole="ficha" ToRole="compound" />
+          <NavigationProperty Name="programs" Relationship="Self.ficha_programOfFicha" FromRole="ficha" ToRole="programs" />
+          <NavigationProperty Name="programs1" Relationship="Self.ficha_subProgramOfFicha" FromRole="ficha" ToRole="programs" />
+          <NavigationProperty Name="fichaFlights" Relationship="Self.fichaFlights_fichaToFlights" FromRole="ficha" ToRole="fichaFlights" />
+          <NavigationProperty Name="itinerary" Relationship="Self.FK_itinerary_ficha" FromRole="ficha" ToRole="itinerary" />
+          <NavigationProperty Name="volunteers" Relationship="Self.volunteers_fichaToVolunteers" FromRole="ficha" ToRole="volunteers" />
+          <NavigationProperty Name="vehicles" Relationship="Self.fichaVehicles" FromRole="ficha" ToRole="vehicles" />
+          <NavigationProperty Name="staff" Relationship="Self.staffInFichas" FromRole="ficha" ToRole="staff" />
+          <NavigationProperty Name="university" Relationship="Self.universitiesInFichas" FromRole="ficha" ToRole="university" />
+        </EntityType>
+        <EntityType Name="fichaFlights">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ficha" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="Int16" Nullable="false" />
+          <Property Name="arrivalTime" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="totalStudents" Type="Int16" Nullable="false" />
+          <Property Name="ficha" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ficha1" Relationship="Self.fichaFlights_fichaToFlights" FromRole="fichaFlights" ToRole="ficha" />
+        </EntityType>
+        <EntityType Name="itinerary">
+          <Key>
+            <PropertyRef Name="fichaId" />
+          </Key>
+          <Property Name="fichaId" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="actividades" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ficha" Relationship="Self.FK_itinerary_ficha" FromRole="itinerary" ToRole="ficha" />
+        </EntityType>
+        <EntityType Name="kitchenFood">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="cost" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="vendor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="buyDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="kitchenTools">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="programs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="program" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ficha" Relationship="Self.ficha_programOfFicha" FromRole="programs" ToRole="ficha" />
+          <NavigationProperty Name="ficha1" Relationship="Self.ficha_subProgramOfFicha" FromRole="programs" ToRole="ficha" />
+          <NavigationProperty Name="community" Relationship="Self.communityxprograms" FromRole="programs" ToRole="community" />
+          <NavigationProperty Name="staff" Relationship="Self.staffxprograms" FromRole="programs" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="securityEquipments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity" Type="Int16" Nullable="false" />
+          <Property Name="cost" Type="Int16" Nullable="false" />
+          <Property Name="coments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="securityMedicines">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="quantity" Type="Int16" Nullable="false" />
+          <Property Name="expirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="especs" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cost" Type="Single" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spokenLanguage">
+          <Key>
+            <PropertyRef Name="staff" />
+            <PropertyRef Name="slanguage" />
+          </Key>
+          <Property Name="staff" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="slanguage" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="staff1" Relationship="Self.FK_spokenLanguage_staff" FromRole="spokenLanguage" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="sex" Type="Int16" Nullable="false" />
+          <Property Name="bornDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="age" Type="Int16" />
+          <Property Name="citizenship" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bloodType" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="maritalStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cellphoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="university" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="allergies" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="medicalCondition" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emergencyContact" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="career" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contractDate" Type="DateTime" Precision="0" />
+          <Property Name="interviewDate" Type="DateTime" Precision="0" />
+          <Property Name="disable" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="spokenLanguage" Relationship="Self.FK_spokenLanguage_staff" FromRole="staff" ToRole="spokenLanguage" />
+          <NavigationProperty Name="ficha" Relationship="Self.staffInFichas" FromRole="staff" ToRole="ficha" />
+          <NavigationProperty Name="programs" Relationship="Self.staffxprograms" FromRole="staff" ToRole="programs" />
+        </EntityType>
+        <EntityType Name="university">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="country" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="disable" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ficha" Relationship="Self.universitiesInFichas" FromRole="university" ToRole="ficha" />
+        </EntityType>
+        <EntityType Name="vehicles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contractType" Type="Int16" Nullable="false" />
+          <Property Name="lessor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="capacity" Type="Int16" Nullable="false" />
+          <Property Name="vyear" Type="Int16" Nullable="false" />
+          <Property Name="insuranceCompany" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="insuranceNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="insuranceType" Type="Int16" Nullable="false" />
+          <Property Name="contactPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="disable" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="ficha" Relationship="Self.fichaVehicles" FromRole="vehicles" ToRole="ficha" />
+        </EntityType>
+        <EntityType Name="volunteers">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="ficha" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="type" Type="Int16" Nullable="false" />
+          <Property Name="earlyArrival" Type="Int16" Nullable="false" />
+          <Property Name="ownLeave" Type="Int16" Nullable="false" />
+          <Property Name="allergies" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="medicalCondition" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="emergencyContact" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="diet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ficha" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="flights" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ficha1" Relationship="Self.volunteers_fichaToVolunteers" FromRole="volunteers" ToRole="ficha" />
+        </EntityType>
+        <Association Name="ficha_communityOfFicha">
+          <End Role="community" Type="Self.community" Multiplicity="0..1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="community">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="community" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ficha_compound">
+          <End Role="compound" Type="Self.compound" Multiplicity="0..1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compound">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="compound" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_evaluationxevaluationType">
+          <End Role="evaluationType" Type="Self.evaluationType" Multiplicity="1" />
+          <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="evaluationType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="evaluation">
+              <PropertyRef Name="tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ficha_programOfFicha">
+          <End Role="programs" Type="Self.programs" Multiplicity="1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="program" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ficha_subProgramOfFicha">
+          <End Role="programs" Type="Self.programs" Multiplicity="0..1" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="programs">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ficha">
+              <PropertyRef Name="subProgram" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fichaFlights_fichaToFlights">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="fichaFlights" Type="Self.fichaFlights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="fichaFlights">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_itinerary_ficha">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="itinerary" Type="Self.itinerary" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="itinerary">
+              <PropertyRef Name="fichaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="volunteers_fichaToVolunteers">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="volunteers" Type="Self.volunteers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="volunteers">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_spokenLanguage_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="spokenLanguage" Type="Self.spokenLanguage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="spokenLanguage">
+              <PropertyRef Name="staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="communityxprograms">
+          <End Role="community" Type="Self.community" Multiplicity="*" />
+          <End Role="programs" Type="Self.programs" Multiplicity="*" />
+        </Association>
+        <Association Name="fichaVehicles">
+          <End Role="vehicles" Type="Self.vehicles" Multiplicity="*" />
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+        </Association>
+        <Association Name="staffInFichas">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+        </Association>
+        <Association Name="staffxprograms">
+          <End Role="programs" Type="Self.programs" Multiplicity="*" />
+          <End Role="staff" Type="Self.staff" Multiplicity="*" />
+        </Association>
+        <Association Name="universitiesInFichas">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="*" />
+          <End Role="university" Type="Self.university" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="alertas" EntityType="Self.alertas" />
+          <EntitySet Name="community" EntityType="Self.community" />
+          <EntitySet Name="compound" EntityType="Self.compound" />
+          <EntitySet Name="evaluation" EntityType="Self.evaluation" />
+          <EntitySet Name="evaluationType" EntityType="Self.evaluationType" />
+          <EntitySet Name="ficha" EntityType="Self.ficha" />
+          <EntitySet Name="fichaFlights" EntityType="Self.fichaFlights" />
+          <EntitySet Name="itinerary" EntityType="Self.itinerary" />
+          <EntitySet Name="kitchenFood" EntityType="Self.kitchenFood" />
+          <EntitySet Name="kitchenTools" EntityType="Self.kitchenTools" />
+          <EntitySet Name="programs" EntityType="Self.programs" />
+          <EntitySet Name="securityEquipments" EntityType="Self.securityEquipments" />
+          <EntitySet Name="securityMedicines" EntityType="Self.securityMedicines" />
+          <EntitySet Name="spokenLanguage" EntityType="Self.spokenLanguage" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="university" EntityType="Self.university" />
+          <EntitySet Name="vehicles" EntityType="Self.vehicles" />
+          <EntitySet Name="volunteers" EntityType="Self.volunteers" />
+          <AssociationSet Name="ficha_communityOfFicha" Association="Self.ficha_communityOfFicha">
+            <End Role="community" EntitySet="community" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ficha_compound" Association="Self.FK_ficha_compound">
+            <End Role="compound" EntitySet="compound" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="FK_evaluationxevaluationType" Association="Self.FK_evaluationxevaluationType">
+            <End Role="evaluationType" EntitySet="evaluationType" />
+            <End Role="evaluation" EntitySet="evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="ficha_programOfFicha" Association="Self.ficha_programOfFicha">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="ficha_subProgramOfFicha" Association="Self.ficha_subProgramOfFicha">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="fichaFlights_fichaToFlights" Association="Self.fichaFlights_fichaToFlights">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="fichaFlights" EntitySet="fichaFlights" />
+          </AssociationSet>
+          <AssociationSet Name="FK_itinerary_ficha" Association="Self.FK_itinerary_ficha">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="itinerary" EntitySet="itinerary" />
+          </AssociationSet>
+          <AssociationSet Name="volunteers_fichaToVolunteers" Association="Self.volunteers_fichaToVolunteers">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="volunteers" EntitySet="volunteers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_spokenLanguage_staff" Association="Self.FK_spokenLanguage_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="spokenLanguage" EntitySet="spokenLanguage" />
+          </AssociationSet>
+          <AssociationSet Name="communityxprograms" Association="Self.communityxprograms">
+            <End Role="community" EntitySet="community" />
+            <End Role="programs" EntitySet="programs" />
+          </AssociationSet>
+          <AssociationSet Name="fichaVehicles" Association="Self.fichaVehicles">
+            <End Role="vehicles" EntitySet="vehicles" />
+            <End Role="ficha" EntitySet="ficha" />
+          </AssociationSet>
+          <AssociationSet Name="staffInFichas" Association="Self.staffInFichas">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="staffxprograms" Association="Self.staffxprograms">
+            <End Role="programs" EntitySet="programs" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
+          <AssociationSet Name="universitiesInFichas" Association="Self.universitiesInFichas">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="university" EntitySet="university" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="logisticaModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="alertas">
+            <EntityTypeMapping TypeName="logisticaModel.alertas">
+              <MappingFragment StoreEntitySet="alertas">
+                <ScalarProperty Name="alertasID" ColumnName="alertasID" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="community">
+            <EntityTypeMapping TypeName="logisticaModel.community">
+              <MappingFragment StoreEntitySet="community">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="comm_members" ColumnName="comm_members" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compound">
+            <EntityTypeMapping TypeName="logisticaModel.compound">
+              <MappingFragment StoreEntitySet="compound">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="town" ColumnName="town" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="bedrooms" ColumnName="bedrooms" />
+                <ScalarProperty Name="electricity" ColumnName="electricity" />
+                <ScalarProperty Name="wifi" ColumnName="wifi" />
+                <ScalarProperty Name="cellphone_signal" ColumnName="cellphone_signal" />
+                <ScalarProperty Name="ventilation" ColumnName="ventilation" />
+                <ScalarProperty Name="toilet_type" ColumnName="toilet_type" />
+                <ScalarProperty Name="toilet_quantity" ColumnName="toilet_quantity" />
+                <ScalarProperty Name="drinkable_water" ColumnName="drinkable_water" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="evaluation">
+            <EntityTypeMapping TypeName="logisticaModel.evaluation">
+              <MappingFragment StoreEntitySet="evaluation">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="respuesta" ColumnName="respuesta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="evaluationType">
+            <EntityTypeMapping TypeName="logisticaModel.evaluationType">
+              <MappingFragment StoreEntitySet="evaluationType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="formulario" ColumnName="formulario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ficha">
+            <EntityTypeMapping TypeName="logisticaModel.ficha">
+              <MappingFragment StoreEntitySet="ficha">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="startingDate" ColumnName="startingDate" />
+                <ScalarProperty Name="endDate" ColumnName="endDate" />
+                <ScalarProperty Name="officeArrivalDate" ColumnName="officeArrivalDate" />
+                <ScalarProperty Name="officeLeaveDate" ColumnName="officeLeaveDate" />
+                <ScalarProperty Name="totalStudents" ColumnName="totalStudents" />
+                <ScalarProperty Name="cityTour" ColumnName="cityTour" />
+                <ScalarProperty Name="compound" ColumnName="compound" />
+                <ScalarProperty Name="community" ColumnName="community" />
+                <ScalarProperty Name="program" ColumnName="program" />
+                <ScalarProperty Name="subProgram" ColumnName="subProgram" />
+                <ScalarProperty Name="priDtop" ColumnName="priDtop" />
+                <ScalarProperty Name="priDted" ColumnName="priDted" />
+                <ScalarProperty Name="secDtop" ColumnName="secDtop" />
+                <ScalarProperty Name="secDted" ColumnName="secDted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fichaFlights">
+            <EntityTypeMapping TypeName="logisticaModel.fichaFlights">
+              <MappingFragment StoreEntitySet="fichaFlights">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+                <ScalarProperty Name="totalStudents" ColumnName="totalStudents" />
+                <ScalarProperty Name="ficha" ColumnName="ficha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itinerary">
+            <EntityTypeMapping TypeName="logisticaModel.itinerary">
+              <MappingFragment StoreEntitySet="itinerary">
+                <ScalarProperty Name="fichaId" ColumnName="fichaId" />
+                <ScalarProperty Name="actividades" ColumnName="actividades" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitchenFood">
+            <EntityTypeMapping TypeName="logisticaModel.kitchenFood">
+              <MappingFragment StoreEntitySet="kitchenFood">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="vendor" ColumnName="vendor" />
+                <ScalarProperty Name="buyDate" ColumnName="buyDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kitchenTools">
+            <EntityTypeMapping TypeName="logisticaModel.kitchenTools">
+              <MappingFragment StoreEntitySet="kitchenTools">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="programs">
+            <EntityTypeMapping TypeName="logisticaModel.programs">
+              <MappingFragment StoreEntitySet="programs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="program" ColumnName="program" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="securityEquipments">
+            <EntityTypeMapping TypeName="logisticaModel.securityEquipments">
+              <MappingFragment StoreEntitySet="securityEquipments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="coments" ColumnName="coments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="securityMedicines">
+            <EntityTypeMapping TypeName="logisticaModel.securityMedicines">
+              <MappingFragment StoreEntitySet="securityMedicines">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="expirationDate" ColumnName="expirationDate" />
+                <ScalarProperty Name="especs" ColumnName="especs" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="spokenLanguage">
+            <EntityTypeMapping TypeName="logisticaModel.spokenLanguage">
+              <MappingFragment StoreEntitySet="spokenLanguage">
+                <ScalarProperty Name="staff" ColumnName="staff" />
+                <ScalarProperty Name="slanguage" ColumnName="slanguage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="logisticaModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="bornDate" ColumnName="bornDate" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="citizenship" ColumnName="citizenship" />
+                <ScalarProperty Name="bloodType" ColumnName="bloodType" />
+                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
+                <ScalarProperty Name="cellphoneNumber" ColumnName="cellphoneNumber" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="university" ColumnName="university" />
+                <ScalarProperty Name="allergies" ColumnName="allergies" />
+                <ScalarProperty Name="medicalCondition" ColumnName="medicalCondition" />
+                <ScalarProperty Name="emergencyContact" ColumnName="emergencyContact" />
+                <ScalarProperty Name="career" ColumnName="career" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="contractDate" ColumnName="contractDate" />
+                <ScalarProperty Name="interviewDate" ColumnName="interviewDate" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="university">
+            <EntityTypeMapping TypeName="logisticaModel.university">
+              <MappingFragment StoreEntitySet="university">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vehicles">
+            <EntityTypeMapping TypeName="logisticaModel.vehicles">
+              <MappingFragment StoreEntitySet="vehicles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="contractType" ColumnName="contractType" />
+                <ScalarProperty Name="lessor" ColumnName="lessor" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="vyear" ColumnName="vyear" />
+                <ScalarProperty Name="insuranceCompany" ColumnName="insuranceCompany" />
+                <ScalarProperty Name="insuranceNumber" ColumnName="insuranceNumber" />
+                <ScalarProperty Name="insuranceType" ColumnName="insuranceType" />
+                <ScalarProperty Name="contactPhone" ColumnName="contactPhone" />
+                <ScalarProperty Name="disable" ColumnName="disable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="volunteers">
+            <EntityTypeMapping TypeName="logisticaModel.volunteers">
+              <MappingFragment StoreEntitySet="volunteers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="earlyArrival" ColumnName="earlyArrival" />
+                <ScalarProperty Name="ownLeave" ColumnName="ownLeave" />
+                <ScalarProperty Name="allergies" ColumnName="allergies" />
+                <ScalarProperty Name="medicalCondition" ColumnName="medicalCondition" />
+                <ScalarProperty Name="emergencyContact" ColumnName="emergencyContact" />
+                <ScalarProperty Name="diet" ColumnName="diet" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="ficha" ColumnName="ficha" />
+                <ScalarProperty Name="flights" ColumnName="flights" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="communityxprograms" TypeName="logisticaModel.communityxprograms" StoreEntitySet="communityxprograms">
+            <EndProperty Name="community">
+              <ScalarProperty Name="id" ColumnName="community" />
+            </EndProperty>
+            <EndProperty Name="programs">
+              <ScalarProperty Name="id" ColumnName="program" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="fichaVehicles" TypeName="logisticaModel.fichaVehicles" StoreEntitySet="fichaVehicles">
+            <EndProperty Name="vehicles">
+              <ScalarProperty Name="id" ColumnName="vehicle" />
+            </EndProperty>
+            <EndProperty Name="ficha">
+              <ScalarProperty Name="id" ColumnName="ficha" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="staffInFichas" TypeName="logisticaModel.staffInFichas" StoreEntitySet="staffInFichas">
+            <EndProperty Name="ficha">
+              <ScalarProperty Name="id" ColumnName="ficha" />
+            </EndProperty>
+            <EndProperty Name="staff">
+              <ScalarProperty Name="id" ColumnName="staffID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="staffxprograms" TypeName="logisticaModel.staffxprograms" StoreEntitySet="staffxprograms">
+            <EndProperty Name="programs">
+              <ScalarProperty Name="id" ColumnName="program" />
+            </EndProperty>
+            <EndProperty Name="staff">
+              <ScalarProperty Name="id" ColumnName="staff" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="universitiesInFichas" TypeName="logisticaModel.universitiesInFichas" StoreEntitySet="universitiesInFichas">
+            <EndProperty Name="ficha">
+              <ScalarProperty Name="id" ColumnName="ficha" />
+            </EndProperty>
+            <EndProperty Name="university">
+              <ScalarProperty Name="id" ColumnName="university" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

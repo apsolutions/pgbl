@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0d0ed8286e54407489977a982053820f" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="logisticaModel.alertas" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.community" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.compound" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.evaluation" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.evaluationType" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.ficha" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.fichaFlights" Width="1.5" PointX="7.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.itinerary" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.kitchenFood" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.kitchenTools" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.programs" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.securityEquipments" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.securityMedicines" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.spokenLanguage" Width="1.5" PointX="12.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.staff" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.university" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.vehicles" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.volunteers" Width="1.5" PointX="7.5" PointY="27.375" IsExpanded="true" />
+        <AssociationConnector Association="logisticaModel.ficha_communityOfFicha" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.FK_ficha_compound" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.FK_evaluationxevaluationType" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.ficha_programOfFicha" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.ficha_subProgramOfFicha" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.fichaFlights_fichaToFlights" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.FK_itinerary_ficha" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.volunteers_fichaToVolunteers" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.FK_spokenLanguage_staff" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.communityxprograms" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.fichaVehicles" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.staffInFichas" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.staffxprograms" ManuallyRouted="false" />
+        <AssociationConnector Association="logisticaModel.universitiesInFichas" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
