@@ -4,18 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Logistica;
+using Logistica.Models;
 
 namespace Logistica.Controllers
 {
 
     public class UsuariosController : Controller
     {
-
+        private ApplicationDbContext identity = new ApplicationDbContext();
         // GET: Usuarios
         public ActionResult Index()
         {
-            return View();
+            var usuarios = identity.Users.ToList();
+            return View(usuarios);
         }
 
         // GET: Usuarios/Details/5

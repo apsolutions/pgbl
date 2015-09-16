@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.Mvc;
 using System.Net;
 using Microsoft.AspNet.Identity;
@@ -15,7 +16,7 @@ namespace Logistica.Controllers
     public class RolesController : Controller
     {
 
-        ApplicationDbContext context = new ApplicationDbContext();
+        private ApplicationDbContext context = new ApplicationDbContext();
 
         // GET: Roles
         public ActionResult Index()
@@ -102,6 +103,39 @@ namespace Logistica.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult Users(string id)
+        {
+            if (id.Equals(string.Empty))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var usersInRole = context.Roles.Find(id).Users.ToList();
+
+            ViewBag.listaUsuarios = (from usuario in context.Users
+                                     where usuario.Roles.Where(r => r.RoleId.Equals(id, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault() == null
+                                     select new
+                                     {
+                                         usuario.Id,
+                                         usuario.UserName
+                                     }
+                                     ).ToList();
+            ViewBag.rol = (from rol in context.Roles
+                           where rol.Id.Equals(id)
+                           select new
+                           {
+                               rol.Id,
+                               rol.Name
+                           }
+                           ).ToList();
+
+            if (usersInRole == null)
+            {
+                return HttpNotFound();
+            }
+            return View(usersInRole);
         }
     }
 }

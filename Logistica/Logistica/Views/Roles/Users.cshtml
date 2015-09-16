@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole>
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<div data-ng-app="usuariosEnRol" data-ng-controller="usuariosEnRolController">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class=""><strong>@ViewBag.Title de {{Rol[0].Name}}</strong></h2>
+        </div>
+        <div class="col-sm-2">
+            <h2 class="text-primary text-center">
+                <span class="glyphicon glyphicon-user"></span>
+            </h2>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            <h4 class="text-primary"><strong>Usuarios disponibles</strong></h4>
+            <div class="list-group" data-ng-if="Usuarios.Disponibles.length > 0">
+                <a href="" class="list-group-item" data-ng-repeat="usuario in Usuarios.Disponibles">
+                    {{usuario.UserName}}
+                </a>
+            </div>
+            <p data-ng-if="Usuarios.Disponibles.length == 0" class="text-info"> <span class="glyphicon glyphicon-info-sign"></span> No se encontraron usuarios en la base de datos que no tengan el rol {{Rol[0].Name}}</p>
+        </div>
+
+        <div class="col-sm-2">
+            <h4 class="text-primary"><strong>Acciones</strong></h4>
+            <div class="btn-group-vertical">
+                <a href="" class="btn btn-default">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Agregar
+                </a>
+                <a href="" class="btn btn-default">
+                    <span class="glyphicon glyphicon-minus"></span>
+                    Quitar
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-5">
+            <h4 class="text-primary"><strong>{{Rol[0].Name}}</strong></h4>
+            <div class="list-group" data-ng-if="Usuarios.EnRol.length > 0">
+                <a href="" class="list-group-item" data-ng-repeat="usuario in Usuarios.EnRol">
+                    {{usuario.UserName}}
+                </a>
+            </div>
+            <p data-ng-if="Usuarios.EnRol.length == 0" class="text-info"> <span class="glyphicon glyphicon-info-sign"></span> No se encontraron usuarios en la base de datos que tengan el rol {{Rol[0].Name}}</p>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = angular.module('usuariosEnRol', []).controller('usuariosEnRolController', function ($scope, $http) {
+            $scope.Usuarios = {};
+            $scope.Usuarios.EnRol = @Html.Raw(Json.Encode(Model));
+            $scope.Usuarios.Disponibles = @Html.Raw(Json.Encode(ViewBag.listaUsuarios));
+            $scope.Usuarios.diferencia = function (){
+                var dif = [];
+                if ($scope.Usuarios.EnRol.length == 0){
+                    return $scope.Usuarios.EnBase;
+                } else {
+                    dif = $scope.Usuarios.EnBase;
+                    for (var i = 0; i < $scope.Usuarios.EnRol.length; i++){
+                        dif.splice(dif.indexOf($scope.Usuarios.EnRol[i]),1);
+                    }
+                    return dif;
+                }                
+            }
+
+            $scope.Usuarios.agregados = {};
+            $scope.Usuarios.eliminados = {};
+
+            $scope.Rol = @Html.Raw(Json.Encode(ViewBag.rol));
+
+            $scope.UsuarioAgregar = {};
+            $scope.UsuarioQuitar = {};
+            
+            $scope.seleccionarUsuario = function (tipo, usuario){
+            }
+
+            $scope.agregarUsuario = function (){
+
+            }
+
+            $scope.quitarUsuario = function (){
+
+            }
+        });
+    </script>
+}
