@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole>
-
-@{
+﻿@{
     ViewBag.Title = "Usuarios";
 }
 
@@ -23,7 +21,7 @@
         <div class="col-sm-5">
             <h4 class="text-primary"><strong>Usuarios disponibles</strong></h4>
             <div class="list-group" data-ng-if="Usuarios.Disponibles.length > 0">
-                <a href="" class="list-group-item" data-ng-repeat="usuario in Usuarios.Disponibles">
+                <a href="" class="list-group-item" data-ng-repeat="usuario in Usuarios.Disponibles" data-ng-class="{active : usuario.Seleccionado}" data-ng-click="seleccionarUsuarioDisponible(usuario)">
                     {{usuario.UserName}}
                 </a>
             </div>
@@ -47,7 +45,7 @@
         <div class="col-sm-5">
             <h4 class="text-primary"><strong>{{Rol[0].Name}}</strong></h4>
             <div class="list-group" data-ng-if="Usuarios.EnRol.length > 0">
-                <a href="" class="list-group-item" data-ng-repeat="usuario in Usuarios.EnRol">
+                <a href="" class="list-group-item" data-ng-repeat="usuario in Usuarios.EnRol" data-ng-class="{active : usuario.Seleccionado}" data-ng-click="seleccionarUsuarioEnRol(usuario)">
                     {{usuario.UserName}}
                 </a>
             </div>
@@ -61,38 +59,38 @@
     <script type="text/javascript">
         var app = angular.module('usuariosEnRol', []).controller('usuariosEnRolController', function ($scope, $http) {
             $scope.Usuarios = {};
-            $scope.Usuarios.EnRol = @Html.Raw(Json.Encode(Model));
+            $scope.Usuarios.EnRol = @Html.Raw(Json.Encode(ViewBag.usersInRole));
             $scope.Usuarios.Disponibles = @Html.Raw(Json.Encode(ViewBag.listaUsuarios));
-            $scope.Usuarios.diferencia = function (){
-                var dif = [];
-                if ($scope.Usuarios.EnRol.length == 0){
-                    return $scope.Usuarios.EnBase;
-                } else {
-                    dif = $scope.Usuarios.EnBase;
-                    for (var i = 0; i < $scope.Usuarios.EnRol.length; i++){
-                        dif.splice(dif.indexOf($scope.Usuarios.EnRol[i]),1);
-                    }
-                    return dif;
-                }                
-            }
 
             $scope.Usuarios.agregados = {};
             $scope.Usuarios.eliminados = {};
 
             $scope.Rol = @Html.Raw(Json.Encode(ViewBag.rol));
 
-            $scope.UsuarioAgregar = {};
-            $scope.UsuarioQuitar = {};
+            $scope.UsuarioAgregar = null;
+            $scope.UsuarioQuitar = null;
             
-            $scope.seleccionarUsuario = function (tipo, usuario){
+            $scope.seleccionarUsuarioDisponible = function (usuario){
+
+                var anterior = $scope.Usuarios.Disponibles.indexOf(usuario);
+                var nuevo = $scope.Usuarios.Disponibles.indexOf(usuario);
+
+                $scope.UsuarioAgregar = usuario;
+
+                $scope.Usuarios.Disponibles[anterior].Seleccionado = false;
+                $scope.Usuarios.Disponibles[nuevo].Seleccionado = true;
+            }
+
+            $scope.seleccionarUsuarioEnRol = function (usuario){
+                $scope.Usuarios.EnRol[$scope.Usuarios.EnRol.indexOf(usuario)].Seleccionado = !usuario.Seleccionado;
             }
 
             $scope.agregarUsuario = function (){
-
+                console.log('');
             }
 
             $scope.quitarUsuario = function (){
-
+                console.log('');
             }
         });
     </script>

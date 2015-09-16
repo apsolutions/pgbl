@@ -107,19 +107,28 @@ namespace Logistica.Controllers
 
         public ActionResult Users(string id)
         {
-            if (id.Equals(string.Empty))
+            if (id == null || id.Equals(string.Empty))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var usersInRole = context.Roles.Find(id).Users.ToList();
+            ViewBag.usersInRole = (from usr in context.Users
+                               where usr.Roles.Where(r => r.RoleId.Equals(id, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault() != null
+                               select new
+                               {
+                                   usr.Id,
+                                   usr.UserName,
+                                   Seleccionado = false
+                               }
+                               ).ToList();
 
             ViewBag.listaUsuarios = (from usuario in context.Users
                                      where usuario.Roles.Where(r => r.RoleId.Equals(id, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault() == null
                                      select new
                                      {
                                          usuario.Id,
-                                         usuario.UserName
+                                         usuario.UserName,
+                                         Seleccionado = false
                                      }
                                      ).ToList();
             ViewBag.rol = (from rol in context.Roles
@@ -131,11 +140,11 @@ namespace Logistica.Controllers
                            }
                            ).ToList();
 
-            if (usersInRole == null)
+            if (ViewBag.usersInRole == null)
             {
                 return HttpNotFound();
             }
-            return View(usersInRole);
+            return View();
         }
     }
 }
