@@ -7,15 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class kitchenTools
+    public partial class fichaFlights
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public short quantity { get; set; }
+        public string id { get; set; }
+        public short type { get; set; }
+        public System.DateTime arrivalTime { get; set; }
+        public short totalStudents { get; set; }
+        public string ficha { get; set; }
+    
+        public virtual ficha ficha1 { get; set; }
     }
 }

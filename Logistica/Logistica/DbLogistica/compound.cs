@@ -7,23 +7,32 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class university
+    public partial class compound
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public university()
+        public compound()
         {
             this.ficha = new HashSet<ficha>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public string country { get; set; }
-        public string city { get; set; }
+        public string location { get; set; }
+        public string town { get; set; }
+        public int capacity { get; set; }
+        public int bedrooms { get; set; }
+        public short electricity { get; set; }
+        public short wifi { get; set; }
+        public short cellphone_signal { get; set; }
+        public string ventilation { get; set; }
+        public string toilet_type { get; set; }
+        public Nullable<int> toilet_quantity { get; set; }
+        public short drinkable_water { get; set; }
         public short disable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

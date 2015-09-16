@@ -7,16 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class spokenLanguage
+    public partial class securityMedicines
     {
-        public string staff { get; set; }
-        public string slanguage { get; set; }
-    
-        public virtual staff staff1 { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string type { get; set; }
+        public short quantity { get; set; }
+        public System.DateTime expirationDate { get; set; }
+        public string especs { get; set; }
+        public float cost { get; set; }
     }
 }

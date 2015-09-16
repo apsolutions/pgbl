@@ -7,15 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class alertas
+    public partial class kitchenTools
     {
-        public long alertasID { get; set; }
-        public string descripcion { get; set; }
-        public string usuario { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public short quantity { get; set; }
     }
 }

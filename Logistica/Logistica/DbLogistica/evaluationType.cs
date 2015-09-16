@@ -7,32 +7,24 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class vehicles
+    public partial class evaluationType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public vehicles()
+        public evaluationType()
         {
-            this.ficha = new HashSet<ficha>();
+            this.evaluation = new HashSet<evaluation>();
         }
     
-        public string id { get; set; }
-        public string name { get; set; }
-        public short contractType { get; set; }
-        public string lessor { get; set; }
-        public short capacity { get; set; }
-        public short vyear { get; set; }
-        public string insuranceCompany { get; set; }
-        public string insuranceNumber { get; set; }
-        public short insuranceType { get; set; }
-        public string contactPhone { get; set; }
-        public short disable { get; set; }
+        public long id { get; set; }
+        public string tipo { get; set; }
+        public string formulario { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ficha> ficha { get; set; }
+        public virtual ICollection<evaluation> evaluation { get; set; }
     }
 }

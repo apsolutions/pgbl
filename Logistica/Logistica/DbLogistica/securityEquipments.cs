@@ -7,19 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class kitchenFood
+    public partial class securityEquipments
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string unit { get; set; }
-        public int quantity { get; set; }
-        public decimal cost { get; set; }
-        public string vendor { get; set; }
-        public System.DateTime buyDate { get; set; }
+        public string type { get; set; }
+        public short quantity { get; set; }
+        public short cost { get; set; }
+        public string coments { get; set; }
     }
 }

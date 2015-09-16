@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="0d0ed8286e54407489977a982053820f" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="fbd8a0f635ef462588adf4a3afc71064" Name="Diagram1">
         <EntityTypeShape EntityType="logisticaModel.alertas" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.community" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.compound" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />

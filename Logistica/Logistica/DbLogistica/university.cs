@@ -7,29 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class community
+    public partial class university
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public community()
+        public university()
         {
             this.ficha = new HashSet<ficha>();
-            this.programs = new HashSet<programs>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
-        public string location { get; set; }
-        public int comm_members { get; set; }
+        public string country { get; set; }
+        public string city { get; set; }
         public short disable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ficha> ficha { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<programs> programs { get; set; }
     }
 }

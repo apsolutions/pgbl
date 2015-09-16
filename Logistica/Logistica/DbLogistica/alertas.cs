@@ -7,16 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class itinerary
+    public partial class alertas
     {
-        public string fichaId { get; set; }
-        public string actividades { get; set; }
-    
-        public virtual ficha ficha { get; set; }
+        public long alertasID { get; set; }
+        public string descripcion { get; set; }
+        public string usuario { get; set; }
     }
 }

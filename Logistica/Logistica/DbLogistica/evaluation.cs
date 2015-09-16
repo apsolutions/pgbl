@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class securityEquipments
+    public partial class evaluation
     {
-        public int id { get; set; }
-        public string name { get; set; }
-        public string type { get; set; }
-        public short quantity { get; set; }
-        public short cost { get; set; }
-        public string coments { get; set; }
+        public long id { get; set; }
+        public long tipo { get; set; }
+        public string respuesta { get; set; }
+    
+        public virtual evaluationType evaluationType { get; set; }
     }
 }

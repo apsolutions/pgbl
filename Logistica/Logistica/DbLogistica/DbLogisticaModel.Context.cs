@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Logistica.db_logistica
+namespace Logistica.DbLogistica
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class logisticaEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public logisticaEntities()
+            : base("name=logisticaEntities")
         {
         }
     
