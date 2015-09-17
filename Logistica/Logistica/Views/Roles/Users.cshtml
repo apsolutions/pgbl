@@ -16,6 +16,16 @@
 
     <hr />
 
+    <div class="alert alert-success fade in" ng-show="salvadoExitoso">
+        <button type="button" class="close" ng-click="closeAlert(0)">&times;</button>
+        <strong class="glyphicon glyphicon-ok"></strong> Cambios salvados exitosamente
+    </div>
+
+    <div class="alert alert-danger fade in" ng-show="salvadoFallido">
+        <button type="button" class="close" ng-click="closeAlert(1)">&times;</button>
+        <strong class="glyphicon glyphicon-remove"></strong> Los cambios no han podido ser salvados.
+    </div>
+
     <div class="row">
 
         <div class="col-sm-5">
@@ -31,13 +41,23 @@
         <div class="col-sm-2">
             <h4 class="text-primary"><strong>Acciones</strong></h4>
             <div class="btn-group-vertical">
-                <a href="" class="btn btn-default">
+                <a href="" class="btn btn-default" data-ng-class="{disabled: UsuarioAgregar == null}" data-ng-click="agregarUsuario()">
                     <span class="glyphicon glyphicon-plus"></span>
                     Agregar
                 </a>
-                <a href="" class="btn btn-default">
+                <a href="" class="btn btn-default" data-ng-class="{disabled: UsuarioQuitar == null}" data-ng-click="quitarUsuario()">
                     <span class="glyphicon glyphicon-minus"></span>
                     Quitar
+                </a>
+                <hr />
+                <a href="" class="btn btn-primary" data-ng-click="salvarCambios()">
+                    <span class="glyphicon glyphicon-save"></span>
+                    Salvar Cambios
+                </a>
+                <hr />
+                <a href="@Url.Action("Index")" class="btn btn-default" data-ng-click="">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    Regresar
                 </a>
             </div>
         </div>
@@ -58,12 +78,12 @@
 @section scripts{
     <script type="text/javascript">
         var app = angular.module('usuariosEnRol', []).controller('usuariosEnRolController', function ($scope, $http) {
+            $scope.salvadoExitoso = false;
+            $scope.salvadoFallido = false;
+
             $scope.Usuarios = {};
             $scope.Usuarios.EnRol = @Html.Raw(Json.Encode(ViewBag.usersInRole));
             $scope.Usuarios.Disponibles = @Html.Raw(Json.Encode(ViewBag.listaUsuarios));
-
-            $scope.Usuarios.agregados = {};
-            $scope.Usuarios.eliminados = {};
 
             $scope.Rol = @Html.Raw(Json.Encode(ViewBag.rol));
 
@@ -71,26 +91,63 @@
             $scope.UsuarioQuitar = null;
             
             $scope.seleccionarUsuarioDisponible = function (usuario){
-
-                var anterior = $scope.Usuarios.Disponibles.indexOf(usuario);
-                var nuevo = $scope.Usuarios.Disponibles.indexOf(usuario);
-
+                var anterior;
+                var nuevo;
+                if ($scope.UsuarioAgregar !== null){
+                    anterior = $scope.Usuarios.Disponibles.indexOf($scope.UsuarioAgregar);
+                    $scope.Usuarios.Disponibles[anterior].Seleccionado = false;
+                }
+                nuevo = $scope.Usuarios.Disponibles.indexOf(usuario);                
                 $scope.UsuarioAgregar = usuario;
-
-                $scope.Usuarios.Disponibles[anterior].Seleccionado = false;
                 $scope.Usuarios.Disponibles[nuevo].Seleccionado = true;
             }
 
             $scope.seleccionarUsuarioEnRol = function (usuario){
-                $scope.Usuarios.EnRol[$scope.Usuarios.EnRol.indexOf(usuario)].Seleccionado = !usuario.Seleccionado;
+                var anterior;
+                var nuevo;
+                if ($scope.UsuarioQuitar !== null){
+                    anterior = $scope.Usuarios.EnRol.indexOf($scope.UsuarioQuitar);
+                    $scope.Usuarios.EnRol[anterior].Seleccionado = false;
+                }
+                nuevo = $scope.Usuarios.EnRol.indexOf(usuario);                
+                $scope.UsuarioQuitar = usuario;
+                $scope.Usuarios.EnRol[nuevo].Seleccionado = true;
             }
 
             $scope.agregarUsuario = function (){
-                console.log('');
+                var usr = $scope.Usuarios.Disponibles.indexOf($scope.UsuarioAgregar);                
+                $scope.Usuarios.Disponibles[usr].Seleccionado = false;
+                $scope.Usuarios.EnRol.push($scope.UsuarioAgregar);
+                $scope.Usuarios.Disponibles.splice(usr,1);
+                $scope.UsuarioAgregar = null;
             }
 
             $scope.quitarUsuario = function (){
-                console.log('');
+                var usr = $scope.Usuarios.EnRol.indexOf($scope.UsuarioQuitar);                
+                $scope.Usuarios.EnRol[usr].Seleccionado = false;
+                $scope.Usuarios.Disponibles.push($scope.UsuarioQuitar);
+                $scope.Usuarios.EnRol.splice(usr,1);
+                $scope.UsuarioQuitar = null;
+            }
+
+            $scope.salvarCambios = function (){
+                $http.post('@Url.Action("SalvarUsuarios")', { 'roleName': $scope.Rol[0].Name, 'usuarios': $scope.Usuarios.EnRol}).success(function (data) {
+                    if(data){
+                        $scope.salvadoExitoso = true;
+                    }else{
+                        $scope.salvadoFallido = true;
+                    }
+                }).error(function () {
+                    console.log("Error");
+                });
+            }
+
+            $scope.closeAlert = function(alert){
+                if (alert == 0){
+                    $scope.salvadoExitoso = false;                    
+                }else{
+                    $scope.salvadoFallido = false;
+                }
             }
         });
     </script>

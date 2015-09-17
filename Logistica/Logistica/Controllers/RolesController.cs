@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Security;
 using System.Web.Mvc;
 using System.Net;
 using Microsoft.AspNet.Identity;
@@ -145,6 +144,42 @@ namespace Logistica.Controllers
                 return HttpNotFound();
             }
             return View();
+        }
+
+        [HttpPost]
+        public bool SalvarUsuarios(string roleName, List<UsuarioViewModel> usuarios)
+        {
+            try
+            {
+                var rol = context.Roles.FirstOrDefault(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase));
+                var usuariosRol = rol.Users.ToList();
+
+                if (usuariosRol.Count != 0)
+                {
+                    foreach (var usr in usuariosRol)
+                    {
+                        rol.Users.Remove(usr);
+                    }
+                }
+
+                if (usuarios != null && usuarios.Count != 0)
+                {
+                    foreach (var usr in usuarios)
+                    {
+                        rol.Users.Add(new IdentityUserRole()
+                        {
+                            UserId = usr.Id
+                        });
+                    }
+                }
+
+                context.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
