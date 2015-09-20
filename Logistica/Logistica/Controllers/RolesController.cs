@@ -11,7 +11,7 @@ using Logistica.Models;
 
 namespace Logistica.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador, Administrador de Sistema")]
     public class RolesController : Controller
     {
 
@@ -53,6 +53,7 @@ namespace Logistica.Controllers
         }
 
         // GET: Roles/Edit/5
+        [Authorize(Roles = "Administrador de Sistema")]
         public ActionResult Edit(string id)
         {
             if (id.Equals(string.Empty))
@@ -72,6 +73,7 @@ namespace Logistica.Controllers
 
         // POST: Roles/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Administrador de Sistema")]
         public ActionResult Edit(IdentityRole role)
         {
             try
@@ -89,6 +91,7 @@ namespace Logistica.Controllers
 
         // POST: Roles/Delete/5
         [HttpPost]
+        [Authorize(Roles = "Administrador de Sistema")]
         public ActionResult Delete(string id)
         {
             try

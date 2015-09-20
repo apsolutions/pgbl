@@ -51,9 +51,13 @@
                             <li><a href="#">Personal</a></li>
                             <li><a href="#">Universidades</a></li>
                             <li><a href="#">Vehículos</a></li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
-                            <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+                            @if (User.IsInRole("Administrador") || User.IsInRole("Administrador de Sistema"))
+                            {
+                                <li class="divider"></li>
+                                <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
+                                <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
+                            }
+                            
                         </ul>
                     </li>
                 </ul>

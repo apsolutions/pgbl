@@ -90,7 +90,7 @@ namespace Logistica.Controllers
                     return View(model);
             }
         }
-
+        /*
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -384,7 +384,7 @@ namespace Logistica.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
+        */
         //
         // POST: /Account/LogOff
         [HttpPost]
@@ -394,7 +394,7 @@ namespace Logistica.Controllers
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }
-
+        /*
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
@@ -402,7 +402,7 @@ namespace Logistica.Controllers
         {
             return View();
         }
-
+        */
         protected override void Dispose(bool disposing)
         {
             if (disposing)

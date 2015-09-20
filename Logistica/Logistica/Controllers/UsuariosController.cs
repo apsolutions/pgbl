@@ -11,7 +11,7 @@ using System.Net;
 
 namespace Logistica.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador,Administrador de Sistema")]
     public class UsuariosController : Controller
     {
         private ApplicationDbContext identity = new ApplicationDbContext();
