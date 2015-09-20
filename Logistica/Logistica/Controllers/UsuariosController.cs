@@ -225,5 +225,27 @@ namespace Logistica.Controllers
                 return false;
             }
         }
+
+        [HttpPost]
+        public async Task<bool> RestablecerContrasena(string id)
+        {
+            try
+            {
+                var remove = await UserManager.RemovePasswordAsync(id);
+                if (remove.Succeeded)
+                {
+                    var reset = await UserManager.AddPasswordAsync(id, "GlobalPanama01!");
+                    if (reset.Succeeded)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

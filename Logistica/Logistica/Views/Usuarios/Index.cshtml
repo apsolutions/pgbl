@@ -16,6 +16,16 @@
 
     <hr />
 
+    <div class="alert alert-success fade in" ng-show="reinicioExitoso">
+        <button type="button" class="close" ng-click="closeAlert(0)">&times;</button>
+        <strong class="glyphicon glyphicon-ok"></strong> Se ha reiniciado la contraseña del usuario exitosamente.
+    </div>
+
+    <div class="alert alert-danger fade in" ng-show="reinicioFallido">
+        <button type="button" class="close" ng-click="closeAlert(1)">&times;</button>
+        <strong class="glyphicon glyphicon-remove"></strong> No se ha podido reiniciar la contraseña del usuario.
+    </div>
+
     <div class="row">
         <div class="col-sm-5">
             <h4 class="text-primary"><strong>Usuario</strong></h4>
@@ -45,7 +55,7 @@
                     Roles
                 </a>
                 <hr />
-                <a href="" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}">
+                <a href="" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}" data-ng-click="restablecerContrasena()">
                     <span class="glyphicon glyphicon-refresh"></span>
                     Contraseña
                 </a>
@@ -64,6 +74,8 @@
 @section scripts{
     <script type="text/javascript">
         var app = angular.module('usuariosIndex', []).controller('usuariosIndexController', function ($scope, $http) {
+            $scope.reinicioExitoso = false;
+            $scope.reinicioFallido = false;
             $scope.Usuarios = @Html.Raw(Json.Encode(ViewBag.usuarios));
             $scope.UsuarioSeleccionado = null;
             $scope.HaSeleccionado = false;
@@ -89,6 +101,28 @@
                     .error(function () {
                         console.log("Error");
                     });
+            }
+
+            $scope.restablecerContrasena = function (){
+                $http.post('@Url.Action("RestablecerContrasena")', { id: $scope.UsuarioSeleccionado.Id}).success(function (data) {
+                    if(data){
+                        $scope.reinicioExitoso = true;
+                    }else{
+                        $scope.reinicioFallido = true;
+                    }
+                    $scope.HaSeleccionado = false;
+                    $scope.UsuarioSeleccionado = null;
+                }).error(function () {
+                    console.log("Error");
+                });
+            }
+
+            $scope.closeAlert = function(alert){
+                if (alert == 0){
+                    $scope.reinicioExitoso = false;
+                }else{
+                    $scope.reinicioFallido = false;
+                }
             }
         });
     </script>
