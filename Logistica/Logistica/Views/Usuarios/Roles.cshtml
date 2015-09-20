@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "Roles";
+}
+
+<div data-ng-app="RolesdelUsuario" data-ng-controller="RolesdelUsuarioController">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class=""><strong>@ViewBag.Title de {{Usuario[0].UserName}}</strong></h2>
+        </div>
+        <div class="col-sm-2">
+            <h2 class="text-primary text-center">
+                <span class="glyphicon glyphicon-pawn"></span>
+            </h2>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="alert alert-success fade in" ng-show="salvadoExitoso">
+        <button type="button" class="close" ng-click="closeAlert(0)">&times;</button>
+        <strong class="glyphicon glyphicon-ok"></strong> Cambios salvados exitosamente
+    </div>
+
+    <div class="alert alert-danger fade in" ng-show="salvadoFallido">
+        <button type="button" class="close" ng-click="closeAlert(1)">&times;</button>
+        <strong class="glyphicon glyphicon-remove"></strong> Los cambios no han podido ser salvados.
+    </div>
+
+    <div class="row">
+
+        <div class="col-sm-5">
+            <h4 class="text-primary"><strong>Roles disponibles</strong></h4>
+            <div class="list-group" data-ng-if="Roles.Disponibles.length > 0">
+                <a href="" class="list-group-item" data-ng-repeat="rol in Roles.Disponibles" data-ng-class="{active : rol.Seleccionado}" data-ng-click="seleccionarRolDisponible(rol)">
+                    {{rol.Name}}
+                </a>
+            </div>
+            <p data-ng-if="Roles.Disponibles.length == 0" class="text-info">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                No se encontraron roles en la base de datos disponibles para el usuario {{Usuario[0].UserName}}
+            </p>
+        </div>
+
+        <div class="col-sm-2">
+            <h4 class="text-primary"><strong>Acciones</strong></h4>
+            <div class="btn-group-vertical">
+                <a href="" class="btn btn-default" data-ng-class="{disabled: RolAgregar == null}" data-ng-click="agregarRol()">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    Agregar
+                </a>
+                <a href="" class="btn btn-default" data-ng-class="{disabled: RolQuitar == null}" data-ng-click="quitarRol()">
+                    <span class="glyphicon glyphicon-minus"></span>
+                    Quitar
+                </a>
+                <hr />
+                <a href="" class="btn btn-primary" data-ng-click="salvarCambios()">
+                    <span class="glyphicon glyphicon-save"></span>
+                    Salvar Cambios
+                </a>
+                <hr />
+                <a href="@Url.Action("Index")" class="btn btn-default" data-ng-click="">
+                    <span class="glyphicon glyphicon-backward"></span>
+                    Regresar
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-5">
+            <h4 class="text-primary"><strong>{{Usuario[0].UserName}}</strong></h4>
+            <div class="list-group" data-ng-if="Roles.delUsuario.length > 0">
+                <a href="" class="list-group-item" data-ng-repeat="rol in Roles.delUsuario" data-ng-class="{active : rol.Seleccionado}" data-ng-click="seleccionarRolesDelUsuario(rol)">
+                    {{rol.Name}}
+                </a>
+            </div>
+            <p data-ng-if="Roles.delUsuario.length == 0" class="text-info">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                No se encontraron roles en la base de datos para el usuario {{Usuario[0].UserName}}
+            </p>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = angular.module('RolesdelUsuario', []).controller('RolesdelUsuarioController', function ($scope, $http) {
+            $scope.salvadoExitoso = false;
+            $scope.salvadoFallido = false;
+
+            $scope.Roles = {};
+            $scope.Roles.delUsuario = @Html.Raw(Json.Encode(ViewBag.rolesUsuario));
+            $scope.Roles.Disponibles = @Html.Raw(Json.Encode(ViewBag.rolesDisponibles));
+
+            $scope.Usuario = @Html.Raw(Json.Encode(ViewBag.usuario));
+
+            $scope.RolAgregar = null;
+            $scope.RolQuitar = null;
+
+            $scope.seleccionarRolDisponible = function (rol){
+                var anterior;
+                var nuevo;
+                if ($scope.RolAgregar !== null){
+                    anterior = $scope.Roles.Disponibles.indexOf($scope.RolAgregar);
+                    $scope.Roles.Disponibles[anterior].Seleccionado = false;
+                }
+                nuevo = $scope.Roles.Disponibles.indexOf(rol);
+                $scope.RolAgregar = rol;
+                $scope.Roles.Disponibles[nuevo].Seleccionado = true;
+            }
+
+            $scope.seleccionarRolesDelUsuario = function (rol){
+                var anterior;
+                var nuevo;
+                if ($scope.RolQuitar !== null){
+                    anterior = $scope.Roles.delUsuario.indexOf($scope.RolQuitar);
+                    $scope.Roles.delUsuario[anterior].Seleccionado = false;
+                }
+                nuevo = $scope.Roles.delUsuario.indexOf(rol);
+                $scope.RolQuitar = rol;
+                $scope.Roles.delUsuario[nuevo].Seleccionado = true;
+            }
+
+            $scope.agregarRol = function (){
+                var rol = $scope.Roles.Disponibles.indexOf($scope.RolAgregar);
+                $scope.Roles.Disponibles[rol].Seleccionado = false;
+                $scope.Roles.delUsuario.push($scope.RolAgregar);
+                $scope.Roles.Disponibles.splice(rol,1);
+                $scope.RolAgregar = null;
+            }
+
+            $scope.quitarRol = function (){
+                var rol = $scope.Roles.delUsuario.indexOf($scope.RolQuitar);
+                $scope.Roles.delUsuario[rol].Seleccionado = false;
+                $scope.Roles.Disponibles.push($scope.RolQuitar);
+                $scope.Roles.delUsuario.splice(rol,1);
+                $scope.RolQuitar = null;
+            }
+
+            $scope.salvarCambios = function (){
+                $http.post('@Url.Action("SalvarRoles")', { 'userName': $scope.Usuario[0].UserName, 'roles': $scope.Roles.delUsuario}).success(function (data) {
+                    if(data){
+                        $scope.salvadoExitoso = true;
+                    }else{
+                        $scope.salvadoFallido = true;
+                    }
+                }).error(function () {
+                    console.log("Error");
+                });
+            }
+
+            $scope.closeAlert = function(alert){
+                if (alert == 0){
+                    $scope.salvadoExitoso = false;
+                }else{
+                    $scope.salvadoFallido = false;
+                }
+            }
+        });
+    </script>
+}

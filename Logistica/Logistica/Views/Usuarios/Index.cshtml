@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Usuarios";
+}
+
+<div data-ng-app="usuariosIndex" data-ng-controller="usuariosIndexController">
+    <div class="row">
+        <div class="col-sm-10">
+            <h2 class=""><strong>@ViewBag.Title</strong></h2>
+        </div>
+        <div class="col-sm-2">
+            <h2 class="text-primary text-center">
+                <span class="glyphicon glyphicon-user"></span>
+            </h2>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-5">
+            <h4 class="text-primary"><strong>Usuario</strong></h4>
+            <div class="list-group" data-ng-if="Usuarios.length > 0">
+                <a href="" class="list-group-item" data-ng-class="{active : usr.Seleccionado}" data-ng-repeat="usr in Usuarios" data-ng-click="seleccionarUsuario(usr)">
+                    {{usr.UserName}}
+                </a>
+            </div>
+            <p data-ng-if="Usuarios.length == 0" class="text-info"> <span class="glyphicon glyphicon-info-sign"></span> No se encontraron usuarios en la base de datos</p>
+        </div>
+
+        <div class="col-sm-5" data-ng-if="Usuarios.length > 0">
+            <h4 class="text-primary"><strong>Acciones</strong></h4>
+            <div class="btn-group-vertical">
+                <a href="~/Usuarios/Edit/{{UsuarioSeleccionado.Id}}" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                    Editar
+                </a>
+                <a href="" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}" data-ng-click="eliminarUsuario()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    Eliminar
+                </a>
+
+                <hr />
+                <a href="~/Usuarios/Roles/{{UsuarioSeleccionado.Id}}" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}">
+                    <span class="glyphicon glyphicon-pawn"></span>
+                    Roles
+                </a>
+                <hr />
+                <a href="" class="btn btn-default" data-ng-class="{disabled : !HaSeleccionado}">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                    Contraseña
+                </a>
+            </div>
+        </div>
+
+        <div data-ng-class="{'col-sm-2' : Usuarios.length > 0 , 'col-sm-7' : Usuarios.length == 0}">
+            <a href='@Url.Action("Create")' class="btn btn-default pull-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                Crear
+            </a>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var app = angular.module('usuariosIndex', []).controller('usuariosIndexController', function ($scope, $http) {
+            $scope.Usuarios = @Html.Raw(Json.Encode(ViewBag.usuarios));
+            $scope.UsuarioSeleccionado = null;
+            $scope.HaSeleccionado = false;
+
+            $scope.seleccionarUsuario = function (usuario){
+                if (!$scope.UsuarioSeleccionado){
+                    $scope.Usuarios[$scope.Usuarios.indexOf(usuario)].Seleccionado = true;
+                }else{
+                    $scope.Usuarios[$scope.Usuarios.indexOf($scope.UsuarioSeleccionado)].Seleccionado = false;
+                    $scope.Usuarios[$scope.Usuarios.indexOf(usuario)].Seleccionado = true;
+                }
+                $scope.HaSeleccionado = true;
+                $scope.UsuarioSeleccionado = usuario;
+            }
+
+            $scope.eliminarUsuario = function(){
+                $http.post('@Url.Action("Delete")', { id: $scope.UsuarioSeleccionado.Id})
+                    .success(function (data) {
+                        $scope.Usuarios.splice($scope.Usuarios.indexOf($scope.UsuarioSeleccionado),1);
+                        $scope.HaSeleccionado = false;
+                        $scope.UsuarioSeleccionado = null;
+                    })
+                    .error(function () {
+                        console.log("Error");
+                    });
+            }
+        });
+    </script>
+}
