@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Logistica.Controllers
 {
+    [Authorize]
     public class ComunidadesController : Controller
     {
         // GET: Comunidad

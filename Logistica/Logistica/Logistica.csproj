@@ -170,84 +170,86 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CampamentosController.cs" />
     <Compile Include="Controllers\ComunidadesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="DbLogistica\alertas.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\community.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\compound.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbLogistica\DbLogisticaModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbLogisticaModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbLogistica\DbLogisticaModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DbLogistica\DbLogisticaModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DbLogisticaModel.edmx</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\evaluation.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\evaluationType.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\ficha.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\fichaFlights.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\itinerary.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\kitchenFood.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\kitchenTools.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbLogistica\Logistica.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logistica.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbLogistica\Logistica.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logistica.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DbLogistica\Logistica.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Logistica.edmx</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\programs.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\securityEquipments.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\securityMedicines.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\spokenLanguage.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\staff.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\university.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\vehicles.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="DbLogistica\volunteers.cs">
-      <DependentUpon>DbLogisticaModel.tt</DependentUpon>
+      <DependentUpon>Logistica.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CampamentoViewModel.cs" />
     <Compile Include="Models\ComunidadesViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -260,15 +262,15 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img\loginBG.png" />
-    <Content Include="DbLogistica\DbLogisticaModel.Context.tt">
+    <Content Include="DbLogistica\Logistica.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbLogisticaModel.edmx</DependentUpon>
-      <LastGenOutput>DbLogisticaModel.Context.cs</LastGenOutput>
+      <DependentUpon>Logistica.edmx</DependentUpon>
+      <LastGenOutput>Logistica.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="DbLogistica\DbLogisticaModel.tt">
+    <Content Include="DbLogistica\Logistica.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DbLogisticaModel.edmx</DependentUpon>
-      <LastGenOutput>DbLogisticaModel.cs</LastGenOutput>
+      <DependentUpon>Logistica.edmx</DependentUpon>
+      <LastGenOutput>Logistica.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -279,12 +281,12 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <EntityDeploy Include="DbLogistica\DbLogisticaModel.edmx">
+    <EntityDeploy Include="DbLogistica\Logistica.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DbLogisticaModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Logistica.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="DbLogistica\DbLogisticaModel.edmx.diagram">
-      <DependentUpon>DbLogisticaModel.edmx</DependentUpon>
+    <Content Include="DbLogistica\Logistica.edmx.diagram">
+      <DependentUpon>Logistica.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -342,6 +344,9 @@
     <Content Include="Views\Usuarios\Create.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Roles.cshtml" />
+    <Content Include="Views\Comunidades\Index.cshtml" />
+    <Content Include="Views\Campamentos\Index.cshtml" />
+    <Content Include="Views\Campamentos\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
