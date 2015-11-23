@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title | Global Brigades Panamá - Logística</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/bootstrap_table")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/angular.min.js")
+    @Scripts.Render("~/bundles/AngularJS")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrapTable")
+    @Scripts.Render("~/bundles/bootstrapTableLocale")
 
 </head>
 <body>
@@ -18,59 +23,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Logística", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
+                @Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")
                 <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Brigadas&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Fichas</a></li>
-                            <li><a href="#">Itinerarios</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Calendario de Brigada</a></li>
-                            <li><a href="#">Calendario de Eventos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Métricas&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Evaluaciones</a></li>
-                            <li><a href="#">Reportes</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Configuraciones&nbsp;<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">@Html.ActionLink("Campamentos", "Index", "Campamentos")</a></li>
-                            <li><a href="#">Comunidades</a></li>
-                            <li><a href="#">Equipos de Cocina</a></li>
-                            <li><a href="#">Equipos de Seguridad</a></li>
-                            <li><a href="#">Inventario de Cocina</a></li>
-                            <li><a href="#">Inventario de Medicinas</a></li>
-                            <li><a href="#">Personal</a></li>
-                            <li><a href="#">Universidades</a></li>
-                            <li><a href="#">Vehículos</a></li>
-                            @if (User.IsInRole("Administrador") || User.IsInRole("Administrador de Sistema"))
-                            {
-                                <li class="divider"></li>
-                                <li>@Html.ActionLink("Usuarios", "Index", "Usuarios")</li>
-                                <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-                            }
-                            
-                        </ul>
-                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
-            </div>
+            </div>            
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">

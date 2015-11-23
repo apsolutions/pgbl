@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Logística" controller="Home" action="Index">
+    <mvcSiteMapNode title="Brigadas" controller="Home" action="Brigadas">
+      <mvcSiteMapNode title="Fichas" controller="" action="Index"/>
+      <mvcSiteMapNode title="Intinerarios" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Calendario" controller="Home" action="Index"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Métricas" controller="Home" action="Metricas">
+      <mvcSiteMapNode title="Evaluaciones" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Reportes" controller="Home" action="Index"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Configuraciones" controller="Home" action="Configuraciones">
+      <mvcSiteMapNode title="Campamentos" controller="Campamentos" action="Index"/>
+      <mvcSiteMapNode title="Comunidades" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Equipos de Cocina" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Equipos de Seguridad" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Inventario de Cocina" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Inventario de Medicinas" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Personal" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Universidades" controller="Home" action="Index"/>
+      <mvcSiteMapNode title="Vehículos" controller="Home" action="Index"/>
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="Seguridad" controller="Home" action="Brigadas">
+      <mvcSiteMapNode title="Usuarios" controller="Usuarios" action="Index"/>
+      <mvcSiteMapNode title="Roles" controller="Roles" action="Index"/>
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+</mvcSiteMap>

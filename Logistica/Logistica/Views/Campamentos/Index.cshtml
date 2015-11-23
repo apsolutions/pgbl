@@ -18,50 +18,7 @@
 
     <div class="row">
         <div class="col-sm-10">
-
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
-                        <input type="text" class="form-control" placeholder="Buscar" data-ng-model="search">
-                    </div>
-                </div>
-            </form>
-
-            <table class="table table-hover">
-                <thead>
-                    <tr class="bg-primary">
-                        <td data-ng-click="sortType = 'name'; sortReverse = !sortReverse">
-                            Nombre
-                            <span data-ng-show="sortType == 'name' && !sortReverse" class="pull-right glyphicon glyphicon-chevron-down"></span>
-                            <span data-ng-show="sortType == 'name' && sortReverse" class="pull-right glyphicon glyphicon-chevron-up"></span>
-                        </td>
-                        <td data-ng-click="sortType = 'location'; sortReverse = !sortReverse">
-                            Provincia
-                            <span data-ng-show="sortType == 'location' && !sortReverse" class="pull-right glyphicon glyphicon-chevron-down"></span>
-                            <span data-ng-show="sortType == 'location' && sortReverse" class="pull-right glyphicon glyphicon-chevron-up"></span>
-                        </td>
-                        <td data-ng-click="sortType = 'capacity'; sortReverse = !sortReverse">
-                            Capacidad
-                            <span data-ng-show="sortType == 'capacity' && !sortReverse" class="pull-right glyphicon glyphicon-chevron-down"></span>
-                            <span data-ng-show="sortType == 'capacity' && sortReverse" class="pull-right glyphicon glyphicon-chevron-up"></span>
-                        </td>
-                        <td data-ng-click="sortType = 'bedrooms'; sortReverse = !sortReverse">
-                            Habitaciones
-                            <span data-ng-show="sortType == 'bedrooms' && !sortReverse" class="pull-right glyphicon glyphicon-chevron-down"></span>
-                            <span data-ng-show="sortType == 'bedrooms' && sortReverse" class="pull-right glyphicon glyphicon-chevron-up"></span>
-                        </td>
-                    </tr>                    
-                </thead>
-                <tbody>
-                    <tr data-ng-repeat="campamento in Campamentos | orderBy:sortType:sortReverse | filter:search" ng-click="setSelected(campamento.id)" ng-class="{active: campamento.id === CampamentoSeleccionado}">
-                        <td>{{campamento.name}}</td>
-                        <td>{{campamento.location}}</td>
-                        <td>{{campamento.capacity}}</td>
-                        <td>{{campamento.bedrooms}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <table id="tablaCampamentos" data-search="true" data-click-to-select="true"></table>
         </div>
         <div class="col-sm-2">
             <div class="btn-group-vertical">
@@ -69,18 +26,17 @@
                     <span class="glyphicon glyphicon-plus"></span>
                     Crear
                 </a>
-                <hr />
-                <a href="" class="btn btn-default">
+                <hr/>
+                <a href="~/Campamentos/Details/{{CampamentoSeleccionado.id}}" class="btn btn-default" data-ng-class="{disabled : !CampamentoSeleccionado}">
                     <span class="glyphicon glyphicon-eye-open"></span>
                     Ver
                 </a>
-
-                <a href="" class="btn btn-default">
+                <a href="~/Campamentos/Edit/{{CampamentoSeleccionado.id}}" class="btn btn-default" data-ng-class="{disabled : !CampamentoSeleccionado}">
                     <span class="glyphicon glyphicon-pencil"></span>
                     Editar
                 </a>
-                <a href="" class="btn btn-default">
-                    <span class="glyphicon glyphicon-remove"></span>
+                <a href="~/Campamentos/Delete/{{CampamentoSeleccionado.id}}" class="btn btn-default" data-ng-class="{disabled : !CampamentoSeleccionado}">
+                    <span class="glyphicon glyphicon-trash"></span>
                     Eliminar
                 </a>
             </div>
@@ -91,16 +47,87 @@
 @section scripts{
     <script type="text/javascript">
         var app = angular.module('campamentos', []).controller('campamentosController', function ($scope, $http) {
-            $scope.Campamentos = @Html.Raw(Json.Encode(ViewBag.campamentos));
-            $scope.sortType     = 'name';
-            $scope.sortReverse  = false;  
-            $scope.search   = '';
+
+            // Variables
             $scope.CampamentoSeleccionado = null;
-            $scope.setSelected = function (CampamentoSeleccionado) {
-                console.log(CampamentoSeleccionado);
-                $scope.CampamentoSeleccionado = CampamentoSeleccionado;
-            };
+
+            //Metodos
+            $('#tablaCampamentos').bootstrapTable({
+                url: '@Url.Action("Actualizar")',
+                method:'post',
+                showRefresh: true,
+                pagination: true,
+                pageSize: 25,
+                pageList: [10, 25, 50, 100],
+                idField: 'id',
+                onClickRow: function (row,$element) {
+                    $scope.CampamentoSeleccionado = row;
+                    $scope.$apply();
+                },
+                columns: [{
+                    radio: true,
+                    width: "5%"
+                }, {
+                    field: 'name',
+                    title: 'Campamento',
+                    searchable: true,
+                    sortable: true,
+                    width: "45%"
+                }, {
+                    field: 'location',
+                    title: 'Provincia',
+                    searchable: true,
+                    sortable: true,
+                    formatter: establecerProvincia,
+                    width: "45%"
+                }, {
+                    field: 'capacity',
+                    title: 'Capacidad',
+                    searchable: true,
+                    sortable: true,
+                    width: "10%"
+                }]
+            });
+
+            function establecerProvincia(value, row) {
+                var provincia = '';
+                switch(value) {
+                    case '1':
+                        provincia = 'Bocas del Toro';
+                        break;
+                    case '2':
+                        provincia = 'Coclé';
+                        break;
+                    case '3':
+                        provincia = 'Colón';
+                        break;
+                    case '4':
+                        provincia = 'Chiriquí';
+                        break;
+                    case '5':
+                        provincia = 'Darién';
+                        break;
+                    case '6':
+                        provincia = 'Herrera';
+                        break;
+                    case '7':
+                        provincia = 'Los Santos';
+                        break;
+                    case '8':
+                        provincia = 'Panamá';
+                        break;
+                    case '9':
+                        provincia = 'Veraguas';
+                        break;
+                    case '10':
+                        provincia = 'Panamá Oeste';
+                        break;
+                    case '11':
+                        provincia = 'San Blas';
+                        break;
+                }
+                return provincia;
+            }
         });
     </script>
 }
-

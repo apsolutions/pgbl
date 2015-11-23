@@ -26,7 +26,7 @@ namespace Logistica.Models
 
         [Required(AllowEmptyStrings = true, ErrorMessage = "El tipo de baño del campamento es requerido")]
         [Display(Name = "Tipo de baño")]
-        public string tipoBano { get; set; }
+        public string[] tipoBano { get; set; }
 
         [Required(AllowEmptyStrings = true, ErrorMessage = "La ventilación del campamento es requerido")]
         [Display(Name = "Ventilación")]

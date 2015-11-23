@@ -14,18 +14,19 @@ namespace Logistica.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Brigadas()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return View("Index");
         }
 
-        public ActionResult Contact()
+        public ActionResult Metricas()
         {
-            ViewBag.Message = "Your contact page.";
+            return View("Index");
+        }
 
-            return View();
+        public ActionResult Configuraciones()
+        {
+            return View("Index");
         }
     }
 }

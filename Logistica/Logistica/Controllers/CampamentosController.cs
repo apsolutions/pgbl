@@ -16,14 +16,14 @@ namespace Logistica.Controllers
         // GET: Campamentos
         public ActionResult Index()
         {
-            ViewBag.campamentos = (from c in logistica.compound where c.disable == 0 select c).ToList();
             return View();
-        }
+        }        
 
         // GET: Campamentos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var campamento = logistica.compound.Where(c => c.id.Equals(id)).FirstOrDefault();
+            return View(campamento);
         }
 
         // GET: Campamentos/Create
@@ -36,6 +36,14 @@ namespace Logistica.Controllers
         [HttpPost]
         public ActionResult Create(CampamentoViewModel collection)
         {
+            /*foreach (SelectListItem bano in collection.TipoBanos)
+            {
+                if (bano.Selected)
+                {
+                    collection.tipoBano += bano.Value;
+                }
+            }*/
+
             try
             {
                 var campamento = new compound() {
@@ -48,7 +56,7 @@ namespace Logistica.Controllers
                     location = collection.Provincia,
                     name = collection.Nombre,
                     toilet_quantity = collection.CantidadBanos,
-                    toilet_type = collection.tipoBano,
+                    toilet_type = collection.tipoBano.ToString(),
                     town = collection.Comunidad,
                     ventilation = collection.Ventilacion,
                     wifi = Convert.ToInt16(collection.Wifi)
@@ -107,6 +115,13 @@ namespace Logistica.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public JsonResult Actualizar()
+        {
+            var campamentos = (from c in logistica.compound where c.disable == 0 select c).ToList();
+            return Json(campamentos, JsonRequestBehavior.AllowGet);
         }
     }
 }
