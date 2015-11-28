@@ -21,5 +21,7 @@ namespace Logistica.DbLogistica
         public System.DateTime expirationDate { get; set; }
         public string especs { get; set; }
         public float cost { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     }
 }

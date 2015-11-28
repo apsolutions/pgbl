@@ -25,6 +25,8 @@ namespace Logistica.DbLogistica
         public string country { get; set; }
         public string city { get; set; }
         public short disable { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ficha> ficha { get; set; }

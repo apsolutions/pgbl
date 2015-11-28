@@ -21,5 +21,7 @@ namespace Logistica.DbLogistica
         public decimal cost { get; set; }
         public string vendor { get; set; }
         public System.DateTime buyDate { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     }
 }

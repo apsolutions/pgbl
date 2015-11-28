@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="logisticaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="logisticaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="alertas">
           <Key>
             <PropertyRef Name="alertasID" />
@@ -22,6 +22,8 @@
           <Property Name="location" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="comm_members" Type="int" Nullable="false" />
           <Property Name="disable" Type="smallint" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="communityxprograms">
           <Key>
@@ -49,6 +51,8 @@
           <Property Name="toilet_quantity" Type="int" />
           <Property Name="drinkable_water" Type="smallint" Nullable="false" />
           <Property Name="disable" Type="smallint" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="evaluation">
           <Key>
@@ -56,7 +60,10 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" />
           <Property Name="tipo" Type="bigint" Nullable="false" />
+          <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="respuesta" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="evaluationType">
           <Key>
@@ -65,6 +72,8 @@
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tipo" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="formulario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="ficha">
           <Key>
@@ -85,6 +94,8 @@
           <Property Name="priDted" Type="date" />
           <Property Name="secDtop" Type="date" />
           <Property Name="secDted" Type="date" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="fichaFlights">
           <Key>
@@ -96,6 +107,8 @@
           <Property Name="arrivalTime" Type="datetime2" Precision="0" Nullable="false" />
           <Property Name="totalStudents" Type="smallint" Nullable="false" />
           <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="fichaVehicles">
           <Key>
@@ -111,6 +124,8 @@
           </Key>
           <Property Name="fichaId" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="actividades" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="kitchenFood">
           <Key>
@@ -123,6 +138,8 @@
           <Property Name="cost" Type="decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="vendor" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="buyDate" Type="date" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="kitchenTools">
           <Key>
@@ -131,6 +148,8 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="quantity" Type="smallint" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="programs">
           <Key>
@@ -138,6 +157,23 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="program" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rolesxstaff">
+          <Key>
+            <PropertyRef Name="staff" />
+            <PropertyRef Name="role" />
+          </Key>
+          <Property Name="staff" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="role" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="securityEquipments">
           <Key>
@@ -149,6 +185,8 @@
           <Property Name="quantity" Type="smallint" Nullable="false" />
           <Property Name="cost" Type="smallint" Nullable="false" />
           <Property Name="coments" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="securityMedicines">
           <Key>
@@ -161,6 +199,8 @@
           <Property Name="expirationDate" Type="date" Nullable="false" />
           <Property Name="especs" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="cost" Type="real" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="spokenLanguage">
           <Key>
@@ -195,6 +235,8 @@
           <Property Name="contractDate" Type="date" />
           <Property Name="interviewDate" Type="date" />
           <Property Name="disable" Type="smallint" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="staffInFichas">
           <Key>
@@ -229,6 +271,8 @@
           <Property Name="country" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="disable" Type="smallint" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="vehicles">
           <Key>
@@ -245,6 +289,8 @@
           <Property Name="insuranceType" Type="smallint" Nullable="false" />
           <Property Name="contactPhone" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="disable" Type="smallint" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="volunteers">
           <Key>
@@ -264,6 +310,8 @@
           <Property Name="comments" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ficha" Type="nvarchar" MaxLength="14" Nullable="false" />
           <Property Name="flights" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="dateModified" Type="date" Nullable="false" />
         </EntityType>
         <Association Name="communityxprograms$communityToProgram">
           <End Role="community" Type="Self.community" Multiplicity="1" />
@@ -349,6 +397,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_evaluation_ficha">
+          <End Role="ficha" Type="Self.ficha" Multiplicity="1" />
+          <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="evaluation">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_evaluationxevaluationType">
           <End Role="evaluationType" Type="Self.evaluationType" Multiplicity="1" />
           <End Role="evaluation" Type="Self.evaluation" Multiplicity="*" />
@@ -394,6 +454,30 @@
             </Principal>
             <Dependent Role="itinerary">
               <PropertyRef Name="fichaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rolesxstaff_roles">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="rolesxstaff" Type="Self.rolesxstaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rolesxstaff">
+              <PropertyRef Name="role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rolesxstaff_staff">
+          <End Role="staff" Type="Self.staff" Multiplicity="1" />
+          <End Role="rolesxstaff" Type="Self.rolesxstaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rolesxstaff">
+              <PropertyRef Name="staff" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -507,6 +591,8 @@
           <EntitySet Name="kitchenFood" EntityType="Self.kitchenFood" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="kitchenTools" EntityType="Self.kitchenTools" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="programs" EntityType="Self.programs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rolesxstaff" EntityType="Self.rolesxstaff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="securityEquipments" EntityType="Self.securityEquipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="securityMedicines" EntityType="Self.securityMedicines" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="spokenLanguage" EntityType="Self.spokenLanguage" Schema="dbo" store:Type="Tables" />
@@ -545,6 +631,10 @@
             <End Role="vehicles" EntitySet="vehicles" />
             <End Role="fichaVehicles" EntitySet="fichaVehicles" />
           </AssociationSet>
+          <AssociationSet Name="FK_evaluation_ficha" Association="Self.FK_evaluation_ficha">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="evaluation" EntitySet="evaluation" />
+          </AssociationSet>
           <AssociationSet Name="FK_evaluationxevaluationType" Association="Self.FK_evaluationxevaluationType">
             <End Role="evaluationType" EntitySet="evaluationType" />
             <End Role="evaluation" EntitySet="evaluation" />
@@ -560,6 +650,14 @@
           <AssociationSet Name="FK_itinerary_ficha" Association="Self.FK_itinerary_ficha">
             <End Role="ficha" EntitySet="ficha" />
             <End Role="itinerary" EntitySet="itinerary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rolesxstaff_roles" Association="Self.FK_rolesxstaff_roles">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="rolesxstaff" EntitySet="rolesxstaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rolesxstaff_staff" Association="Self.FK_rolesxstaff_staff">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="rolesxstaff" EntitySet="rolesxstaff" />
           </AssociationSet>
           <AssociationSet Name="FK_spokenLanguage_staff" Association="Self.FK_spokenLanguage_staff">
             <End Role="staff" EntitySet="staff" />
@@ -594,8 +692,7 @@
             <End Role="volunteers" EntitySet="volunteers" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="logisticaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -618,6 +715,8 @@
           <Property Name="disable" Type="Int16" Nullable="false" />
           <NavigationProperty Name="ficha" Relationship="Self.ficha_communityOfFicha" FromRole="community" ToRole="ficha" />
           <NavigationProperty Name="programs" Relationship="Self.communityxprograms" FromRole="community" ToRole="programs" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="compound">
           <Key>
@@ -638,6 +737,8 @@
           <Property Name="drinkable_water" Type="Int16" Nullable="false" />
           <Property Name="disable" Type="Int16" Nullable="false" />
           <NavigationProperty Name="ficha" Relationship="Self.FK_ficha_compound" FromRole="compound" ToRole="ficha" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="evaluation">
           <Key>
@@ -647,6 +748,10 @@
           <Property Name="tipo" Type="Int64" Nullable="false" />
           <Property Name="respuesta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="evaluationType" Relationship="Self.FK_evaluationxevaluationType" FromRole="evaluation" ToRole="evaluationType" />
+          <Property Name="ficha" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ficha1" Relationship="logisticaModel.FK_evaluation_ficha" FromRole="evaluation" ToRole="ficha" />
         </EntityType>
         <EntityType Name="evaluationType">
           <Key>
@@ -656,6 +761,8 @@
           <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="formulario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="evaluation" Relationship="Self.FK_evaluationxevaluationType" FromRole="evaluationType" ToRole="evaluation" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="ficha">
           <Key>
@@ -686,6 +793,9 @@
           <NavigationProperty Name="vehicles" Relationship="Self.fichaVehicles" FromRole="ficha" ToRole="vehicles" />
           <NavigationProperty Name="staff" Relationship="Self.staffInFichas" FromRole="ficha" ToRole="staff" />
           <NavigationProperty Name="university" Relationship="Self.universitiesInFichas" FromRole="ficha" ToRole="university" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="evaluation" Relationship="logisticaModel.FK_evaluation_ficha" FromRole="ficha" ToRole="evaluation" />
         </EntityType>
         <EntityType Name="fichaFlights">
           <Key>
@@ -698,6 +808,8 @@
           <Property Name="totalStudents" Type="Int16" Nullable="false" />
           <Property Name="ficha" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ficha1" Relationship="Self.fichaFlights_fichaToFlights" FromRole="fichaFlights" ToRole="ficha" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="itinerary">
           <Key>
@@ -706,6 +818,8 @@
           <Property Name="fichaId" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="actividades" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ficha" Relationship="Self.FK_itinerary_ficha" FromRole="itinerary" ToRole="ficha" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="kitchenFood">
           <Key>
@@ -718,6 +832,8 @@
           <Property Name="cost" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
           <Property Name="vendor" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="buyDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="kitchenTools">
           <Key>
@@ -726,6 +842,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="quantity" Type="Int16" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="programs">
           <Key>
@@ -748,6 +866,8 @@
           <Property Name="quantity" Type="Int16" Nullable="false" />
           <Property Name="cost" Type="Int16" Nullable="false" />
           <Property Name="coments" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="securityMedicines">
           <Key>
@@ -760,6 +880,8 @@
           <Property Name="expirationDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="especs" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="cost" Type="Single" Nullable="false" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="spokenLanguage">
           <Key>
@@ -798,6 +920,9 @@
           <NavigationProperty Name="spokenLanguage" Relationship="Self.FK_spokenLanguage_staff" FromRole="staff" ToRole="spokenLanguage" />
           <NavigationProperty Name="ficha" Relationship="Self.staffInFichas" FromRole="staff" ToRole="ficha" />
           <NavigationProperty Name="programs" Relationship="Self.staffxprograms" FromRole="staff" ToRole="programs" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="roles" Relationship="logisticaModel.rolesxstaff" FromRole="staff" ToRole="roles" />
         </EntityType>
         <EntityType Name="university">
           <Key>
@@ -809,6 +934,8 @@
           <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="disable" Type="Int16" Nullable="false" />
           <NavigationProperty Name="ficha" Relationship="Self.universitiesInFichas" FromRole="university" ToRole="ficha" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="vehicles">
           <Key>
@@ -826,6 +953,8 @@
           <Property Name="contactPhone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="disable" Type="Int16" Nullable="false" />
           <NavigationProperty Name="ficha" Relationship="Self.fichaVehicles" FromRole="vehicles" ToRole="ficha" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <EntityType Name="volunteers">
           <Key>
@@ -846,6 +975,8 @@
           <Property Name="ficha" Type="String" MaxLength="14" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="flights" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ficha1" Relationship="Self.volunteers_fichaToVolunteers" FromRole="volunteers" ToRole="ficha" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
         </EntityType>
         <Association Name="ficha_communityOfFicha">
           <End Role="community" Type="Self.community" Multiplicity="0..1" />
@@ -1050,7 +1181,42 @@
             <End Role="ficha" EntitySet="ficha" />
             <End Role="university" EntitySet="university" />
           </AssociationSet>
+          <EntitySet Name="roles" EntityType="logisticaModel.roles" />
+          <AssociationSet Name="FK_evaluation_ficha" Association="logisticaModel.FK_evaluation_ficha">
+            <End Role="ficha" EntitySet="ficha" />
+            <End Role="evaluation" EntitySet="evaluation" />
+          </AssociationSet>
+          <AssociationSet Name="rolesxstaff" Association="logisticaModel.rolesxstaff">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="staff" EntitySet="staff" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lastModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dateModified" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="staff" Relationship="logisticaModel.rolesxstaff" FromRole="roles" ToRole="staff" />
+        </EntityType>
+        <Association Name="FK_evaluation_ficha">
+          <End Type="logisticaModel.ficha" Role="ficha" Multiplicity="1" />
+          <End Type="logisticaModel.evaluation" Role="evaluation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ficha">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="evaluation">
+              <PropertyRef Name="ficha" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="rolesxstaff">
+          <End Type="logisticaModel.roles" Role="roles" Multiplicity="*" />
+          <End Type="logisticaModel.staff" Role="staff" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1069,6 +1235,8 @@
           <EntitySetMapping Name="community">
             <EntityTypeMapping TypeName="logisticaModel.community">
               <MappingFragment StoreEntitySet="community">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="location" ColumnName="location" />
@@ -1080,6 +1248,8 @@
           <EntitySetMapping Name="compound">
             <EntityTypeMapping TypeName="logisticaModel.compound">
               <MappingFragment StoreEntitySet="compound">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="location" ColumnName="location" />
@@ -1100,6 +1270,9 @@
           <EntitySetMapping Name="evaluation">
             <EntityTypeMapping TypeName="logisticaModel.evaluation">
               <MappingFragment StoreEntitySet="evaluation">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
+                <ScalarProperty Name="ficha" ColumnName="ficha" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="respuesta" ColumnName="respuesta" />
@@ -1109,6 +1282,8 @@
           <EntitySetMapping Name="evaluationType">
             <EntityTypeMapping TypeName="logisticaModel.evaluationType">
               <MappingFragment StoreEntitySet="evaluationType">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tipo" ColumnName="tipo" />
                 <ScalarProperty Name="formulario" ColumnName="formulario" />
@@ -1118,6 +1293,8 @@
           <EntitySetMapping Name="ficha">
             <EntityTypeMapping TypeName="logisticaModel.ficha">
               <MappingFragment StoreEntitySet="ficha">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="startingDate" ColumnName="startingDate" />
                 <ScalarProperty Name="endDate" ColumnName="endDate" />
@@ -1139,6 +1316,8 @@
           <EntitySetMapping Name="fichaFlights">
             <EntityTypeMapping TypeName="logisticaModel.fichaFlights">
               <MappingFragment StoreEntitySet="fichaFlights">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
@@ -1150,6 +1329,8 @@
           <EntitySetMapping Name="itinerary">
             <EntityTypeMapping TypeName="logisticaModel.itinerary">
               <MappingFragment StoreEntitySet="itinerary">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="fichaId" ColumnName="fichaId" />
                 <ScalarProperty Name="actividades" ColumnName="actividades" />
               </MappingFragment>
@@ -1158,6 +1339,8 @@
           <EntitySetMapping Name="kitchenFood">
             <EntityTypeMapping TypeName="logisticaModel.kitchenFood">
               <MappingFragment StoreEntitySet="kitchenFood">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
@@ -1171,6 +1354,8 @@
           <EntitySetMapping Name="kitchenTools">
             <EntityTypeMapping TypeName="logisticaModel.kitchenTools">
               <MappingFragment StoreEntitySet="kitchenTools">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="quantity" ColumnName="quantity" />
@@ -1188,6 +1373,8 @@
           <EntitySetMapping Name="securityEquipments">
             <EntityTypeMapping TypeName="logisticaModel.securityEquipments">
               <MappingFragment StoreEntitySet="securityEquipments">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="type" ColumnName="type" />
@@ -1200,6 +1387,8 @@
           <EntitySetMapping Name="securityMedicines">
             <EntityTypeMapping TypeName="logisticaModel.securityMedicines">
               <MappingFragment StoreEntitySet="securityMedicines">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="type" ColumnName="type" />
@@ -1221,6 +1410,8 @@
           <EntitySetMapping Name="staff">
             <EntityTypeMapping TypeName="logisticaModel.staff">
               <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
@@ -1248,6 +1439,8 @@
           <EntitySetMapping Name="university">
             <EntityTypeMapping TypeName="logisticaModel.university">
               <MappingFragment StoreEntitySet="university">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="country" ColumnName="country" />
@@ -1259,6 +1452,8 @@
           <EntitySetMapping Name="vehicles">
             <EntityTypeMapping TypeName="logisticaModel.vehicles">
               <MappingFragment StoreEntitySet="vehicles">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="contractType" ColumnName="contractType" />
@@ -1276,6 +1471,8 @@
           <EntitySetMapping Name="volunteers">
             <EntityTypeMapping TypeName="logisticaModel.volunteers">
               <MappingFragment StoreEntitySet="volunteers">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
@@ -1330,6 +1527,24 @@
             </EndProperty>
             <EndProperty Name="university">
               <ScalarProperty Name="id" ColumnName="university" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="logisticaModel.roles">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="dateModified" ColumnName="dateModified" />
+                <ScalarProperty Name="lastModifiedBy" ColumnName="lastModifiedBy" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="rolesxstaff" TypeName="logisticaModel.rolesxstaff" StoreEntitySet="rolesxstaff">
+            <EndProperty Name="staff">
+              <ScalarProperty Name="id" ColumnName="staff" />
+            </EndProperty>
+            <EndProperty Name="roles">
+              <ScalarProperty Name="id" ColumnName="role" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

@@ -19,6 +19,8 @@ namespace Logistica.DbLogistica
         public System.DateTime arrivalTime { get; set; }
         public short totalStudents { get; set; }
         public string ficha { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         public virtual ficha ficha1 { get; set; }
     }

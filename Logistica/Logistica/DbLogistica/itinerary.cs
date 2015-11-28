@@ -16,6 +16,8 @@ namespace Logistica.DbLogistica
     {
         public string fichaId { get; set; }
         public string actividades { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         public virtual ficha ficha { get; set; }
     }

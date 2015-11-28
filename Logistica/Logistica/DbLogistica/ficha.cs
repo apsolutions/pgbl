@@ -22,6 +22,7 @@ namespace Logistica.DbLogistica
             this.vehicles = new HashSet<vehicles>();
             this.staff = new HashSet<staff>();
             this.university = new HashSet<university>();
+            this.evaluation = new HashSet<evaluation>();
         }
     
         public string id { get; set; }
@@ -39,6 +40,8 @@ namespace Logistica.DbLogistica
         public Nullable<System.DateTime> priDted { get; set; }
         public Nullable<System.DateTime> secDtop { get; set; }
         public Nullable<System.DateTime> secDted { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         public virtual community community1 { get; set; }
         public virtual compound compound1 { get; set; }
@@ -55,5 +58,7 @@ namespace Logistica.DbLogistica
         public virtual ICollection<staff> staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<university> university { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<evaluation> evaluation { get; set; }
     }
 }

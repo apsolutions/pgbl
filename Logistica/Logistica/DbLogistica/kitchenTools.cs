@@ -17,5 +17,7 @@ namespace Logistica.DbLogistica
         public int id { get; set; }
         public string name { get; set; }
         public short quantity { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     }
 }

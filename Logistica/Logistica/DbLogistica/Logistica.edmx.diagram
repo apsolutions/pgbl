@@ -8,17 +8,17 @@
         <EntityTypeShape EntityType="logisticaModel.alertas" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.community" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.compound" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="logisticaModel.evaluation" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="logisticaModel.evaluationType" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.evaluation" Width="1.5" PointX="6.875" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.evaluationType" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.ficha" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="logisticaModel.fichaFlights" Width="1.5" PointX="7.5" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.fichaFlights" Width="1.5" PointX="3.125" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.itinerary" Width="1.5" PointX="7.5" PointY="15.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.kitchenFood" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.kitchenTools" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.programs" Width="1.5" PointX="3" PointY="24" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.securityEquipments" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.securityMedicines" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="logisticaModel.spokenLanguage" Width="1.5" PointX="12.75" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="logisticaModel.spokenLanguage" Width="1.5" PointX="12.75" PointY="18.375" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.staff" Width="1.5" PointX="10.5" PointY="18.25" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.university" Width="1.5" PointX="7.5" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="logisticaModel.vehicles" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
@@ -37,6 +37,9 @@
         <AssociationConnector Association="logisticaModel.staffInFichas" ManuallyRouted="false" />
         <AssociationConnector Association="logisticaModel.staffxprograms" ManuallyRouted="false" />
         <AssociationConnector Association="logisticaModel.universitiesInFichas" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="logisticaModel.roles" Width="1.5" PointX="12.75" PointY="20.5" />
+        <AssociationConnector Association="logisticaModel.FK_evaluation_ficha" />
+        <AssociationConnector Association="logisticaModel.rolesxstaff" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

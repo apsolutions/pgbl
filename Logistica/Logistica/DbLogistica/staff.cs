@@ -20,6 +20,7 @@ namespace Logistica.DbLogistica
             this.spokenLanguage = new HashSet<spokenLanguage>();
             this.ficha = new HashSet<ficha>();
             this.programs = new HashSet<programs>();
+            this.roles = new HashSet<roles>();
         }
     
         public string username { get; set; }
@@ -43,6 +44,8 @@ namespace Logistica.DbLogistica
         public Nullable<System.DateTime> contractDate { get; set; }
         public Nullable<System.DateTime> interviewDate { get; set; }
         public short disable { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<spokenLanguage> spokenLanguage { get; set; }
@@ -50,5 +53,7 @@ namespace Logistica.DbLogistica
         public virtual ICollection<ficha> ficha { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<programs> programs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<roles> roles { get; set; }
     }
 }

@@ -17,7 +17,11 @@ namespace Logistica.DbLogistica
         public long id { get; set; }
         public long tipo { get; set; }
         public string respuesta { get; set; }
+        public string ficha { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         public virtual evaluationType evaluationType { get; set; }
+        public virtual ficha ficha1 { get; set; }
     }
 }

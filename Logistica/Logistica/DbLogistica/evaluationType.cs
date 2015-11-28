@@ -23,6 +23,8 @@ namespace Logistica.DbLogistica
         public long id { get; set; }
         public string tipo { get; set; }
         public string formulario { get; set; }
+        public string lastModifiedBy { get; set; }
+        public System.DateTime dateModified { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<evaluation> evaluation { get; set; }

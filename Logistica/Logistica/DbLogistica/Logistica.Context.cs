@@ -43,5 +43,6 @@ namespace Logistica.DbLogistica
         public virtual DbSet<university> university { get; set; }
         public virtual DbSet<vehicles> vehicles { get; set; }
         public virtual DbSet<volunteers> volunteers { get; set; }
+        public virtual DbSet<roles> roles { get; set; }
     }
 }
